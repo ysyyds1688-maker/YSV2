@@ -37,6 +37,7 @@ export const HomePage = () => {
                 backgroundImage: 'url(/images/home-banner.jpg)',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
+                aspectRatio: '16/9',
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/60 to-slate-950"></div>
