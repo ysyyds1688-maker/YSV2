@@ -105,6 +105,11 @@ export const Footer = () => (
                 出金保障
               </Link>
             </li>
+            <li>
+              <Link to="/trust/influencer" className="hover:text-white transition-colors">
+                合作網紅推薦
+              </Link>
+            </li>
           </ul>
         </div>
         <div>

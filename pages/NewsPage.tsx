@@ -38,6 +38,9 @@ export const NewsPage = () => {
                   <Calendar size={14} className="mr-2" />
                   {article.date}
                 </div>
+                <div className="flex items-center text-cyan-400 text-sm font-bold mt-4 group-hover:translate-x-1 transition-transform">
+                  閱讀更多 <ArrowRight size={14} className="ml-2" />
+                </div>
               </Link>
             ))}
           </div>

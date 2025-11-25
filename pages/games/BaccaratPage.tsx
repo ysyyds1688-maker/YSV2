@@ -142,17 +142,22 @@ export const BaccaratPage = () => {
                 <h3 className="text-white font-bold mb-4">相關教學</h3>
                 <ul className="space-y-2">
                   <li>
-                    <Link to="/guides/baccarat-basics" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                    <Link to="/guides/games/baccarat/basics" className="text-cyan-400 hover:text-cyan-300 text-sm">
                       百家樂基礎教學
                     </Link>
                   </li>
                   <li>
-                    <Link to="/guides/baccarat-strategy" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                    <Link to="/guides/games/baccarat/road-reading" className="text-cyan-400 hover:text-cyan-300 text-sm">
                       百家樂看路法
                     </Link>
                   </li>
                   <li>
-                    <Link to="/news/baccarat-tips" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                    <Link to="/guides/games/baccarat/betting-strategy" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                      百家樂下注策略
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/news" className="text-cyan-400 hover:text-cyan-300 text-sm">
                       百家樂技巧分享
                     </Link>
                   </li>

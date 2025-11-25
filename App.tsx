@@ -18,6 +18,8 @@ import { NewsPage } from './pages/NewsPage';
 import { AboutPage } from './pages/trust/AboutPage';
 import { SecurityPage } from './pages/trust/SecurityPage';
 import { ContactPage } from './pages/trust/ContactPage';
+import { InfluencerPage } from './pages/trust/InfluencerPage';
+import { NewsDetailPage } from './pages/NewsDetailPage';
 // 遊戲攻略
 import { GameGuidesIndexPage } from './pages/guides/games/GameGuidesIndexPage';
 import { BaccaratGuidesIndexPage } from './pages/guides/games/baccarat/BaccaratGuidesIndexPage';
@@ -31,7 +33,12 @@ import { SlotsVolatilityPage } from './pages/guides/games/slots/SlotsVolatilityP
 import { SlotsJackpotStrategyPage } from './pages/guides/games/slots/SlotsJackpotStrategyPage';
 import { SportsGuidesIndexPage } from './pages/guides/games/sports/SportsGuidesIndexPage';
 import { SportsBankrollManagementPage } from './pages/guides/games/sports/SportsBankrollManagementPage';
+import { SportsOddsAnalysisPage } from './pages/guides/games/sports/SportsOddsAnalysisPage';
+import { SportsLiveBettingPage } from './pages/guides/games/sports/SportsLiveBettingPage';
 import { PokerGuidesIndexPage } from './pages/guides/games/poker/PokerGuidesIndexPage';
+import { PokerStartingHandsPage } from './pages/guides/games/poker/PokerStartingHandsPage';
+import { PokerPositionPlayPage } from './pages/guides/games/poker/PokerPositionPlayPage';
+import { PokerTournamentStrategyPage } from './pages/guides/games/poker/PokerTournamentStrategyPage';
 // 娛樂城攻略
 import { CasinoGuidesIndexPage } from './pages/guides/casino/CasinoGuidesIndexPage';
 import { RegistrationIndexPage } from './pages/guides/casino/registration/RegistrationIndexPage';
@@ -91,8 +98,13 @@ export default function App() {
               {/* 體育投注攻略 */}
               <Route path="/guides/games/sports" element={<SportsGuidesIndexPage />} />
               <Route path="/guides/games/sports/bankroll-management" element={<SportsBankrollManagementPage />} />
+              <Route path="/guides/games/sports/odds-analysis" element={<SportsOddsAnalysisPage />} />
+              <Route path="/guides/games/sports/live-betting" element={<SportsLiveBettingPage />} />
               {/* 德州撲克攻略 */}
               <Route path="/guides/games/poker" element={<PokerGuidesIndexPage />} />
+              <Route path="/guides/games/poker/starting-hands" element={<PokerStartingHandsPage />} />
+              <Route path="/guides/games/poker/position-play" element={<PokerPositionPlayPage />} />
+              <Route path="/guides/games/poker/tournament-strategy" element={<PokerTournamentStrategyPage />} />
 
               {/* 娛樂城攻略 */}
               <Route path="/guides/casino" element={<CasinoGuidesIndexPage />} />
@@ -113,12 +125,13 @@ export default function App() {
 
               {/* 最新消息 */}
               <Route path="/news" element={<NewsPage />} />
-              <Route path="/news/:id" element={<NewsPage />} />
+              <Route path="/news/:id" element={<NewsDetailPage />} />
 
               {/* 可信任信號頁 */}
               <Route path="/trust/about" element={<AboutPage />} />
               <Route path="/trust/security" element={<SecurityPage />} />
               <Route path="/trust/contact" element={<ContactPage />} />
+              <Route path="/trust/influencer" element={<InfluencerPage />} />
 
               {/* 註冊頁面（暫時導向首頁） */}
               <Route path="/register" element={<HomePage />} />

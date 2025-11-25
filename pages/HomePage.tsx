@@ -130,6 +130,64 @@ export const HomePage = () => {
           </div>
         </div>
 
+        {/* 遊戲攻略與娛樂城推薦入口 */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <Link
+              to="/guides/games"
+              className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border border-cyan-500/30 rounded-2xl p-8 hover:border-cyan-400/50 hover:bg-cyan-900/40 transition-all group"
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">遊戲攻略中心</h2>
+              <p className="text-slate-300 mb-4">從基礎到進階，完整的遊戲攻略教學</p>
+              <div className="flex items-center text-cyan-400 font-bold text-sm">
+                查看攻略 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+            <Link
+              to="/recommendations"
+              className="bg-gradient-to-br from-fuchsia-900/30 to-purple-900/30 border border-fuchsia-500/30 rounded-2xl p-8 hover:border-fuchsia-400/50 hover:bg-fuchsia-900/40 transition-all group"
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-fuchsia-400 transition-colors">娛樂城推薦</h2>
+              <p className="text-slate-300 mb-4">2025年最佳娛樂城推薦與評比</p>
+              <div className="flex items-center text-fuchsia-400 font-bold text-sm">
+                查看推薦 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* 最新攻略文章串接 */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-white">最新攻略文章</h2>
+            <Link to="/guides/games" className="text-cyan-400 hover:text-cyan-300 font-bold text-sm">
+              查看全部 →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { title: '百家樂看路法完整教學', url: '/guides/games/baccarat/road-reading', category: '百家樂', readTime: '8 min' },
+              { title: '老虎機 RTP 選擇指南', url: '/guides/games/slots/rtp-guide', category: '老虎機', readTime: '6 min' },
+              { title: '體育投注資金管理法', url: '/guides/games/sports/bankroll-management', category: '體育投注', readTime: '10 min' },
+            ].map((article) => (
+              <Link
+                key={article.url}
+                to={article.url}
+                className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
+              >
+                <span className="text-xs text-cyan-400 font-bold mb-2 block">{article.category}</span>
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                  {article.title}
+                </h3>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-500">{article.readTime}</span>
+                  <ArrowRight size={14} className="text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* 新手教學入口 */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           <h2 className="text-3xl font-bold text-white text-center mb-12">新手教學</h2>
@@ -149,6 +207,26 @@ export const HomePage = () => {
                 <p className="text-slate-400 text-sm">{guide.desc}</p>
               </Link>
             ))}
+          </div>
+        </div>
+
+        {/* APP 下載 */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-8 md:p-12 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">下載 YS 娛樂城 APP</h2>
+            <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+              隨時隨地享受遊戲樂趣，支援 iOS 與 Android 系統，安全快速，體驗更流暢
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button className="px-6 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white font-bold hover:bg-slate-700 transition-all flex items-center justify-center">
+                <span className="mr-2">📱</span>
+                iOS 下載
+              </button>
+              <button className="px-6 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white font-bold hover:bg-slate-700 transition-all flex items-center justify-center">
+                <span className="mr-2">🤖</span>
+                Android 下載
+              </button>
+            </div>
           </div>
         </div>
 
