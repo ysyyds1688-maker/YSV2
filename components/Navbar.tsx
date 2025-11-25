@@ -21,7 +21,9 @@ export const Navbar = () => {
   const navItems = [
     { path: '/', label: 'YS 首頁' },
     { path: '/games', label: '遊戲專區' },
-    { path: '/guides/register', label: '新手教學' },
+    { path: '/guides/games', label: '遊戲攻略' },
+    { path: '/guides/casino', label: '娛樂城攻略' },
+    { path: '/recommendations', label: '娛樂城推薦' },
     { path: '/promotions', label: '優惠活動' },
     { path: '/news', label: '最新消息' },
   ];

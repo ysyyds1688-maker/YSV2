@@ -41,6 +41,16 @@ export const Footer = () => (
           </h4>
           <ul className="space-y-2 text-sm">
             <li>
+              <Link to="/guides/games" className="hover:text-fuchsia-400 transition-colors">
+                遊戲攻略
+              </Link>
+            </li>
+            <li>
+              <Link to="/guides/casino" className="hover:text-fuchsia-400 transition-colors">
+                娛樂城攻略
+              </Link>
+            </li>
+            <li>
               <Link to="/guides/register" className="hover:text-fuchsia-400 transition-colors">
                 如何註冊
               </Link>
@@ -50,13 +60,28 @@ export const Footer = () => (
                 如何出金
               </Link>
             </li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-white font-bold mb-4">推薦與評比</h4>
+          <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/guides/usdt-deposit" className="hover:text-fuchsia-400 transition-colors">
-                USDT 儲值教學
+              <Link to="/recommendations" className="hover:text-white transition-colors">
+                娛樂城推薦
               </Link>
             </li>
             <li>
-              <Link to="/guides/scam-prevention" className="hover:text-fuchsia-400 transition-colors">
+              <Link to="/recommendations/best-casinos/2025" className="hover:text-white transition-colors">
+                2025年最佳推薦
+              </Link>
+            </li>
+            <li>
+              <Link to="/recommendations/best-casinos/fast-withdrawal" className="hover:text-white transition-colors">
+                快速出金推薦
+              </Link>
+            </li>
+            <li>
+              <Link to="/guides/scam-prevention" className="hover:text-white transition-colors">
                 詐騙避免指南
               </Link>
             </li>

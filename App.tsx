@@ -18,6 +18,32 @@ import { NewsPage } from './pages/NewsPage';
 import { AboutPage } from './pages/trust/AboutPage';
 import { SecurityPage } from './pages/trust/SecurityPage';
 import { ContactPage } from './pages/trust/ContactPage';
+// 遊戲攻略
+import { GameGuidesIndexPage } from './pages/guides/games/GameGuidesIndexPage';
+import { BaccaratGuidesIndexPage } from './pages/guides/games/baccarat/BaccaratGuidesIndexPage';
+import { BaccaratBasicsPage } from './pages/guides/games/baccarat/BaccaratBasicsPage';
+import { BaccaratRoadReadingPage } from './pages/guides/games/baccarat/BaccaratRoadReadingPage';
+import { BaccaratBettingStrategyPage } from './pages/guides/games/baccarat/BaccaratBettingStrategyPage';
+import { BaccaratAdvancedTipsPage } from './pages/guides/games/baccarat/BaccaratAdvancedTipsPage';
+import { SlotsGuidesIndexPage } from './pages/guides/games/slots/SlotsGuidesIndexPage';
+import { SlotsRTPGuidePage } from './pages/guides/games/slots/SlotsRTPGuidePage';
+import { SlotsVolatilityPage } from './pages/guides/games/slots/SlotsVolatilityPage';
+import { SlotsJackpotStrategyPage } from './pages/guides/games/slots/SlotsJackpotStrategyPage';
+import { SportsGuidesIndexPage } from './pages/guides/games/sports/SportsGuidesIndexPage';
+import { SportsBankrollManagementPage } from './pages/guides/games/sports/SportsBankrollManagementPage';
+import { PokerGuidesIndexPage } from './pages/guides/games/poker/PokerGuidesIndexPage';
+// 娛樂城攻略
+import { CasinoGuidesIndexPage } from './pages/guides/casino/CasinoGuidesIndexPage';
+import { RegistrationIndexPage } from './pages/guides/casino/registration/RegistrationIndexPage';
+import { DepositIndexPage } from './pages/guides/casino/deposit/DepositIndexPage';
+import { WithdrawalIndexPage } from './pages/guides/casino/withdrawal/WithdrawalIndexPage';
+import { BonusesIndexPage } from './pages/guides/casino/bonuses/BonusesIndexPage';
+// 娛樂城推薦
+import { RecommendationsIndexPage } from './pages/recommendations/RecommendationsIndexPage';
+import { BestCasinos2025Page } from './pages/recommendations/best-casinos/BestCasinos2025Page';
+import { FastWithdrawalPage } from './pages/recommendations/best-casinos/FastWithdrawalPage';
+import { HighBonusPage } from './pages/recommendations/best-casinos/HighBonusPage';
+import { USDTFriendlyPage } from './pages/recommendations/best-casinos/USDTFriendlyPage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 
@@ -48,6 +74,39 @@ export default function App() {
               <Route path="/guides/usdt-deposit" element={<USDTDepositGuidePage />} />
               <Route path="/guides/forgot-password" element={<ForgotPasswordGuidePage />} />
               <Route path="/guides/scam-prevention" element={<ScamPreventionGuidePage />} />
+
+              {/* 遊戲攻略 */}
+              <Route path="/guides/games" element={<GameGuidesIndexPage />} />
+              {/* 百家樂攻略 */}
+              <Route path="/guides/games/baccarat" element={<BaccaratGuidesIndexPage />} />
+              <Route path="/guides/games/baccarat/basics" element={<BaccaratBasicsPage />} />
+              <Route path="/guides/games/baccarat/road-reading" element={<BaccaratRoadReadingPage />} />
+              <Route path="/guides/games/baccarat/betting-strategy" element={<BaccaratBettingStrategyPage />} />
+              <Route path="/guides/games/baccarat/advanced-tips" element={<BaccaratAdvancedTipsPage />} />
+              {/* 老虎機攻略 */}
+              <Route path="/guides/games/slots" element={<SlotsGuidesIndexPage />} />
+              <Route path="/guides/games/slots/rtp-guide" element={<SlotsRTPGuidePage />} />
+              <Route path="/guides/games/slots/volatility" element={<SlotsVolatilityPage />} />
+              <Route path="/guides/games/slots/jackpot-strategy" element={<SlotsJackpotStrategyPage />} />
+              {/* 體育投注攻略 */}
+              <Route path="/guides/games/sports" element={<SportsGuidesIndexPage />} />
+              <Route path="/guides/games/sports/bankroll-management" element={<SportsBankrollManagementPage />} />
+              {/* 德州撲克攻略 */}
+              <Route path="/guides/games/poker" element={<PokerGuidesIndexPage />} />
+
+              {/* 娛樂城攻略 */}
+              <Route path="/guides/casino" element={<CasinoGuidesIndexPage />} />
+              <Route path="/guides/casino/registration" element={<RegistrationIndexPage />} />
+              <Route path="/guides/casino/deposit" element={<DepositIndexPage />} />
+              <Route path="/guides/casino/withdrawal" element={<WithdrawalIndexPage />} />
+              <Route path="/guides/casino/bonuses" element={<BonusesIndexPage />} />
+
+              {/* 娛樂城推薦 */}
+              <Route path="/recommendations" element={<RecommendationsIndexPage />} />
+              <Route path="/recommendations/best-casinos/2025" element={<BestCasinos2025Page />} />
+              <Route path="/recommendations/best-casinos/fast-withdrawal" element={<FastWithdrawalPage />} />
+              <Route path="/recommendations/best-casinos/high-bonus" element={<HighBonusPage />} />
+              <Route path="/recommendations/best-casinos/usdt-friendly" element={<USDTFriendlyPage />} />
 
               {/* 優惠活動 */}
               <Route path="/promotions" element={<PromotionsPage />} />
