@@ -27,9 +27,26 @@ export const HomePage = () => {
       />
       
       <div className="min-h-screen bg-slate-950 animate-fade-in-up">
-        {/* Hero Section */}
+        {/* Hero Section with Banner */}
         <div className="relative pt-20 pb-32 overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-40 pointer-events-none">
+          {/* Banner Background Image */}
+          <div className="absolute inset-0 z-0">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+              style={{
+                backgroundImage: 'url(/images/home-banner.jpg)',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/60 to-slate-950"></div>
+            </div>
+            {/* Fallback gradient if image not loaded */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-cyan-950/20 to-fuchsia-950/20"></div>
+          </div>
+          
+          {/* Animated Blob Effects (overlay) */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-30 pointer-events-none z-0">
             <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
             <div className="absolute top-20 right-20 w-72 h-72 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
             <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
