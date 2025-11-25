@@ -93,9 +93,15 @@
   <!-- 優惠活動 -->
   <url>
     <loc>https://ys-entertainment.com/promotions</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2025-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/promotions/monthly/2025/01</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   <!-- 最新消息 -->
@@ -228,6 +234,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- 註冊相關 -->
   <url>
     <loc>https://ys-entertainment.com/guides/casino/registration</loc>
     <lastmod>2025-01-01</lastmod>
@@ -235,11 +242,43 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ys-entertainment.com/guides/casino/registration/step-by-step</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/registration/verification</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/registration/bonus-claim</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 儲值相關 -->
+  <url>
     <loc>https://ys-entertainment.com/guides/casino/deposit</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/deposit/methods</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/deposit/bank-transfer</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 出金相關 -->
   <url>
     <loc>https://ys-entertainment.com/guides/casino/withdrawal</loc>
     <lastmod>2025-01-01</lastmod>
@@ -247,7 +286,38 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ys-entertainment.com/guides/casino/withdrawal/speed-comparison</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/withdrawal/troubleshooting</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 優惠相關 -->
+  <url>
     <loc>https://ys-entertainment.com/guides/casino/bonuses</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/bonuses/types</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/bonuses/wagering-requirements</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ys-entertainment.com/guides/casino/bonuses/best-practices</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

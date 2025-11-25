@@ -14,6 +14,7 @@ import { USDTDepositGuidePage } from './pages/guides/USDTDepositGuidePage';
 import { ForgotPasswordGuidePage } from './pages/guides/ForgotPasswordGuidePage';
 import { ScamPreventionGuidePage } from './pages/guides/ScamPreventionGuidePage';
 import { PromotionsPage } from './pages/PromotionsPage';
+import { MonthlyPromotionsPage } from './pages/promotions/MonthlyPromotionsPage';
 import { NewsPage } from './pages/NewsPage';
 import { AboutPage } from './pages/trust/AboutPage';
 import { SecurityPage } from './pages/trust/SecurityPage';
@@ -42,9 +43,19 @@ import { PokerTournamentStrategyPage } from './pages/guides/games/poker/PokerTou
 // 娛樂城攻略
 import { CasinoGuidesIndexPage } from './pages/guides/casino/CasinoGuidesIndexPage';
 import { RegistrationIndexPage } from './pages/guides/casino/registration/RegistrationIndexPage';
+import { RegistrationStepByStepPage } from './pages/guides/casino/registration/RegistrationStepByStepPage';
+import { RegistrationVerificationPage } from './pages/guides/casino/registration/RegistrationVerificationPage';
+import { RegistrationBonusClaimPage } from './pages/guides/casino/registration/RegistrationBonusClaimPage';
 import { DepositIndexPage } from './pages/guides/casino/deposit/DepositIndexPage';
+import { DepositMethodsPage } from './pages/guides/casino/deposit/DepositMethodsPage';
+import { DepositBankTransferPage } from './pages/guides/casino/deposit/DepositBankTransferPage';
 import { WithdrawalIndexPage } from './pages/guides/casino/withdrawal/WithdrawalIndexPage';
+import { WithdrawalSpeedComparisonPage } from './pages/guides/casino/withdrawal/WithdrawalSpeedComparisonPage';
+import { WithdrawalTroubleshootingPage } from './pages/guides/casino/withdrawal/WithdrawalTroubleshootingPage';
 import { BonusesIndexPage } from './pages/guides/casino/bonuses/BonusesIndexPage';
+import { BonusesTypesPage } from './pages/guides/casino/bonuses/BonusesTypesPage';
+import { BonusesWageringRequirementsPage } from './pages/guides/casino/bonuses/BonusesWageringRequirementsPage';
+import { BonusesBestPracticesPage } from './pages/guides/casino/bonuses/BonusesBestPracticesPage';
 // 娛樂城推薦
 import { RecommendationsIndexPage } from './pages/recommendations/RecommendationsIndexPage';
 import { BestCasinos2025Page } from './pages/recommendations/best-casinos/BestCasinos2025Page';
@@ -108,10 +119,24 @@ export default function App() {
 
               {/* 娛樂城攻略 */}
               <Route path="/guides/casino" element={<CasinoGuidesIndexPage />} />
+              {/* 註冊相關 */}
               <Route path="/guides/casino/registration" element={<RegistrationIndexPage />} />
+              <Route path="/guides/casino/registration/step-by-step" element={<RegistrationStepByStepPage />} />
+              <Route path="/guides/casino/registration/verification" element={<RegistrationVerificationPage />} />
+              <Route path="/guides/casino/registration/bonus-claim" element={<RegistrationBonusClaimPage />} />
+              {/* 儲值相關 */}
               <Route path="/guides/casino/deposit" element={<DepositIndexPage />} />
+              <Route path="/guides/casino/deposit/methods" element={<DepositMethodsPage />} />
+              <Route path="/guides/casino/deposit/bank-transfer" element={<DepositBankTransferPage />} />
+              {/* 出金相關 */}
               <Route path="/guides/casino/withdrawal" element={<WithdrawalIndexPage />} />
+              <Route path="/guides/casino/withdrawal/speed-comparison" element={<WithdrawalSpeedComparisonPage />} />
+              <Route path="/guides/casino/withdrawal/troubleshooting" element={<WithdrawalTroubleshootingPage />} />
+              {/* 優惠相關 */}
               <Route path="/guides/casino/bonuses" element={<BonusesIndexPage />} />
+              <Route path="/guides/casino/bonuses/types" element={<BonusesTypesPage />} />
+              <Route path="/guides/casino/bonuses/wagering-requirements" element={<BonusesWageringRequirementsPage />} />
+              <Route path="/guides/casino/bonuses/best-practices" element={<BonusesBestPracticesPage />} />
 
               {/* 娛樂城推薦 */}
               <Route path="/recommendations" element={<RecommendationsIndexPage />} />
@@ -122,6 +147,7 @@ export default function App() {
 
               {/* 優惠活動 */}
               <Route path="/promotions" element={<PromotionsPage />} />
+              <Route path="/promotions/monthly/:year/:month" element={<MonthlyPromotionsPage />} />
 
               {/* 最新消息 */}
               <Route path="/news" element={<NewsPage />} />
