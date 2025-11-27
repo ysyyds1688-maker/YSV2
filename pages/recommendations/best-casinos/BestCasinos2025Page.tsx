@@ -122,6 +122,7 @@ export const BestCasinos2025Page = () => {
                         <span className="text-2xl font-black text-white mr-3">#{index + 1}</span>
                         <h3 className="text-2xl font-bold text-white">{casino.name}</h3>
                       </div>
+                    </div>
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <Star
