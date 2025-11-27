@@ -43,6 +43,7 @@ export const LotteryPage = () => {
           </div>
         </div>
       </div>
+      </div>
     </>
   );
 };
