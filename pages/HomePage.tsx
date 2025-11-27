@@ -32,15 +32,15 @@ export const HomePage = () => {
           {/* Banner Background Image */}
           <div className="absolute inset-0 z-0">
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: 'url(/images/home-banner.jpg)',
+                backgroundImage: 'url(/images/home-banner.png)',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
-                aspectRatio: '16/9',
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/60 to-slate-950"></div>
+              {/* Dark overlay for text readability - lighter overlay to show image */}
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/30 to-slate-950/60"></div>
             </div>
             {/* Fallback gradient if image not loaded */}
             <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-cyan-950/20 to-fuchsia-950/20"></div>
