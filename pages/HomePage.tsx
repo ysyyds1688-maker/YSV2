@@ -145,7 +145,7 @@ export const HomePage = () => {
                 <div 
                   className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
                   style={{
-                    backgroundImage: `url(${game.image})`,
+                    backgroundImage: `url("${game.image}")`,
                   }}
                 ></div>
                 <div className="relative z-10">
@@ -224,7 +224,7 @@ export const HomePage = () => {
                 <div 
                   className="w-full h-40 bg-cover bg-center relative"
                   style={{
-                    backgroundImage: `url(${article.image})`,
+                    backgroundImage: `url("${article.image}")`,
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>

@@ -67,7 +67,7 @@ export const InfluencerPage = () => {
                 <div 
                   className="w-full h-48 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url(/images/influencers/influencer-${index + 1}.jpg)`,
+                    backgroundImage: `url("/images/influencers/influencer-${index + 1}.jpg")`,
                   }}
                 >
                   <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>

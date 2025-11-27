@@ -33,7 +33,7 @@ export const NewsPage = () => {
                 <div 
                   className="w-full h-48 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url(${article.image})`,
+                    backgroundImage: `url("${article.image}")`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
