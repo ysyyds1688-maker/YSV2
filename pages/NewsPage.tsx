@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 export const NewsPage = () => {
   const articles = [
-    { id: 1, title: '百家樂技巧全攻略', date: '2024-03-20', category: '遊戲技巧' },
-    { id: 2, title: '老虎機推薦 2025', date: '2024-03-18', category: '遊戲推薦' },
-    { id: 3, title: '體育下注分析', date: '2024-03-15', category: '賽事分析' },
-    { id: 4, title: '娛樂城推薦 2025', date: '2024-03-12', category: '平台推薦' },
+    { id: 1, title: '百家樂技巧全攻略', date: '2024-03-20', category: '遊戲技巧', image: '/images/articles/baccarat-tips.jpg' },
+    { id: 2, title: '老虎機推薦 2025', date: '2024-03-18', category: '遊戲推薦', image: '/images/articles/slots-recommendation.jpg' },
+    { id: 3, title: '體育下注分析', date: '2024-03-15', category: '賽事分析', image: '/images/articles/sports-analysis.jpg' },
+    { id: 4, title: '娛樂城推薦 2025', date: '2024-03-12', category: '平台推薦', image: '/images/articles/casino-recommendation.jpg' },
   ];
 
   return (
@@ -28,18 +28,30 @@ export const NewsPage = () => {
               <Link
                 key={article.id}
                 to={`/news/${article.id}`}
-                className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
+                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
               >
-                <span className="text-xs text-cyan-400 font-bold mb-2 block">{article.category}</span>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
-                  {article.title}
-                </h3>
-                <div className="flex items-center text-slate-500 text-sm">
-                  <Calendar size={14} className="mr-2" />
-                  {article.date}
+                <div 
+                  className="w-full h-48 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${article.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
                 </div>
-                <div className="flex items-center text-cyan-400 text-sm font-bold mt-4 group-hover:translate-x-1 transition-transform">
-                  閱讀更多 <ArrowRight size={14} className="ml-2" />
+                <div className="p-6">
+                  <span className="text-xs text-cyan-400 font-bold mb-2 block">{article.category}</span>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                    {article.title}
+                  </h3>
+                  <div className="flex items-center text-slate-500 text-sm">
+                    <Calendar size={14} className="mr-2" />
+                    {article.date}
+                  </div>
+                  <div className="flex items-center text-cyan-400 text-sm font-bold mt-4 group-hover:translate-x-1 transition-transform">
+                    閱讀更多 <ArrowRight size={14} className="ml-2" />
+                  </div>
                 </div>
               </Link>
             ))}

@@ -66,10 +66,20 @@ export const NewsDetailPage = () => {
           </Link>
 
           <article className="bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12">
-            <div className="mb-6">
-              <span className="px-3 py-1 bg-cyan-600/20 border border-cyan-500/50 text-cyan-400 text-xs font-bold rounded mb-4 inline-block">
+            {/* Article Hero Image */}
+            <div 
+              className="w-full h-64 md:h-96 rounded-xl mb-8 bg-cover bg-center relative overflow-hidden"
+              style={{
+                backgroundImage: `url(/images/articles/${id === '1' ? 'baccarat-tips' : id === '2' ? 'slots-recommendation' : id === '3' ? 'sports-analysis' : 'casino-recommendation'}.jpg)`,
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+              <span className="absolute top-4 left-4 px-3 py-1 bg-cyan-600/80 backdrop-blur-sm border border-cyan-500/50 text-cyan-100 text-xs font-bold rounded">
                 {article.category}
               </span>
+            </div>
+            
+            <div className="mb-6">
               <h1 className="text-3xl md:text-4xl font-black text-white mb-4">
                 {article.title}
               </h1>

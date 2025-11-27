@@ -25,18 +25,36 @@ export const BaccaratPage = () => {
         structuredData={structuredData}
       />
       
-      <div className="min-h-screen bg-slate-950 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-slate-950">
+        {/* Hero Section with Cover Image */}
+        <div className="relative pt-20 pb-16 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: 'url(/images/baccarat/baccarat-cover.png)',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80"></div>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
+              真人百家樂
+            </h1>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+              專業荷官發牌，最真實的賭場體驗
+            </p>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Breadcrumb
             items={[
               { name: '遊戲專區', url: '/games' },
               { name: '真人百家樂', url: '/games/baccarat' },
             ]}
           />
-          
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-6">
-            真人百家樂
-          </h1>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <div className="lg:col-span-2 space-y-8">

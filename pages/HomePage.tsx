@@ -130,19 +130,28 @@ export const HomePage = () => {
           <h2 className="text-3xl font-bold text-white text-center mb-12">熱門遊戲專區</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {[
-              { name: '電子遊戲', url: '/games/slots', icon: '🎰' },
-              { name: '真人百家樂', url: '/games/baccarat', icon: '🃏' },
-              { name: '體育投注', url: '/games/sports', icon: '⚽' },
-              { name: '棋牌遊戲', url: '/games/poker', icon: '🀄' },
-              { name: '彩票', url: '/games/lottery', icon: '🎫' },
+              { name: '電子遊戲', url: '/games/slots', icon: '🎰', image: '/images/games/slots.png' },
+              { name: '真人百家樂', url: '/games/baccarat', icon: '🃏', image: '/images/games/baccarat.png' },
+              { name: '體育投注', url: '/games/sports', icon: '⚽', image: '/images/games/sports.png' },
+              { name: '棋牌遊戲', url: '/games/poker', icon: '🀄', image: '/images/games/poker.png' },
+              { name: '彩票', url: '/games/lottery', icon: '🎫', image: '/images/games/lottery.png' },
             ].map((game) => (
               <Link
                 key={game.url}
                 to={game.url}
-                className="bg-slate-900 border border-slate-800 p-6 rounded-xl text-center hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
+                className="bg-slate-900 border border-slate-800 p-6 rounded-xl text-center hover:border-cyan-500/50 hover:bg-slate-800 transition-all group relative overflow-hidden"
               >
-                <div className="text-4xl mb-3">{game.icon}</div>
-                <div className="text-white font-bold group-hover:text-cyan-400 transition-colors">{game.name}</div>
+                {/* Background Image (optional, falls back to emoji if image not found) */}
+                <div 
+                  className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${game.image})`,
+                  }}
+                ></div>
+                <div className="relative z-10">
+                  <div className="text-4xl mb-3">{game.icon}</div>
+                  <div className="text-white font-bold group-hover:text-cyan-400 transition-colors">{game.name}</div>
+                </div>
               </Link>
             ))}
           </div>
@@ -184,22 +193,53 @@ export const HomePage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { title: '百家樂看路法完整教學', url: '/guides/games/baccarat/road-reading', category: '百家樂', readTime: '8 min' },
-              { title: '老虎機 RTP 選擇指南', url: '/guides/games/slots/rtp-guide', category: '老虎機', readTime: '6 min' },
-              { title: '體育投注資金管理法', url: '/guides/games/sports/bankroll-management', category: '體育投注', readTime: '10 min' },
+              { 
+                title: '百家樂看路法完整教學', 
+                url: '/guides/games/baccarat/road-reading', 
+                category: '百家樂', 
+                readTime: '8 min',
+                image: '/images/articles/baccarat-road-reading.jpg'
+              },
+              { 
+                title: '老虎機 RTP 選擇指南', 
+                url: '/guides/games/slots/rtp-guide', 
+                category: '老虎機', 
+                readTime: '6 min',
+                image: '/images/articles/slots-rtp-guide.jpg'
+              },
+              { 
+                title: '體育投注資金管理法', 
+                url: '/guides/games/sports/bankroll-management', 
+                category: '體育投注', 
+                readTime: '10 min',
+                image: '/images/articles/sports-bankroll.jpg'
+              },
             ].map((article) => (
               <Link
                 key={article.url}
                 to={article.url}
-                className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
+                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
               >
-                <span className="text-xs text-cyan-400 font-bold mb-2 block">{article.category}</span>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                  {article.title}
-                </h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-500">{article.readTime}</span>
-                  <ArrowRight size={14} className="text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                {/* Article Cover Image */}
+                <div 
+                  className="w-full h-40 bg-cover bg-center relative"
+                  style={{
+                    backgroundImage: `url(${article.image})`,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                  <span className="absolute top-3 left-3 px-2 py-1 bg-cyan-600/80 backdrop-blur-sm text-cyan-100 text-xs font-bold rounded">
+                    {article.category}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    {article.title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-500">{article.readTime}</span>
+                    <ArrowRight size={14} className="text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
               </Link>
             ))}

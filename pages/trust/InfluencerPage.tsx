@@ -11,6 +11,7 @@ export const InfluencerPage = () => {
       specialty: '百家樂教學',
       rating: 4.8,
       description: '專業百家樂教學，提供實戰技巧與看路法分析',
+      avatar: '/images/influencers/influencer-1.jpg',
     },
     {
       name: '網紅B',
@@ -19,6 +20,7 @@ export const InfluencerPage = () => {
       specialty: '體育投注分析',
       rating: 4.7,
       description: '每日提供體育賽事分析與投注建議',
+      avatar: '/images/influencers/influencer-2.jpg',
     },
     {
       name: '網紅C',
@@ -27,6 +29,7 @@ export const InfluencerPage = () => {
       specialty: '娛樂城推薦',
       rating: 4.9,
       description: '定期評測各大娛樂城，提供真實使用體驗',
+      avatar: '/images/influencers/influencer-3.jpg',
     },
   ];
 
@@ -55,31 +58,42 @@ export const InfluencerPage = () => {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {influencers.map((influencer) => (
+            {influencers.map((influencer, index) => (
               <div
                 key={influencer.name}
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 transition-all"
+                className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white">{influencer.name}</h3>
-                    <p className="text-sm text-slate-400">{influencer.platform}</p>
+                {/* Influencer Avatar */}
+                <div 
+                  className="w-full h-48 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(/images/influencers/influencer-${index + 1}.jpg)`,
+                  }}
+                >
+                  <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+                </div>
+                <div className="p-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-white">{influencer.name}</h3>
+                      <p className="text-sm text-slate-400">{influencer.platform}</p>
+                    </div>
+                    <div className="flex items-center">
+                      <Star size={20} className="text-yellow-400 mr-1" fill="currentColor" />
+                      <span className="text-white font-bold">{influencer.rating}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <Star size={20} className="text-yellow-400 mr-1" fill="currentColor" />
-                    <span className="text-white font-bold">{influencer.rating}</span>
+                  <div className="flex items-center text-slate-400 text-sm mb-4">
+                    <Users size={16} className="mr-2" />
+                    {influencer.subscribers} 訂閱
                   </div>
+                  <div className="mb-4">
+                    <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 border border-cyan-900 rounded-full text-xs font-bold">
+                      {influencer.specialty}
+                    </span>
+                  </div>
+                  <p className="text-slate-300 text-sm">{influencer.description}</p>
                 </div>
-                <div className="flex items-center text-slate-400 text-sm mb-4">
-                  <Users size={16} className="mr-2" />
-                  {influencer.subscribers} 訂閱
-                </div>
-                <div className="mb-4">
-                  <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 border border-cyan-900 rounded-full text-xs font-bold">
-                    {influencer.specialty}
-                  </span>
-                </div>
-                <p className="text-slate-300 text-sm">{influencer.description}</p>
               </div>
             ))}
           </div>

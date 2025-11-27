@@ -73,6 +73,16 @@ export const BaccaratBasicsPage = () => {
             </h1>
             
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12 mb-8">
+              {/* Hero Image */}
+              <div 
+                className="w-full h-64 rounded-xl mb-8 bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url(/images/guides/baccarat-basics.jpg)',
+                }}
+              >
+                <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent rounded-xl"></div>
+              </div>
+              
               <p className="text-lg text-slate-300 mb-8 leading-relaxed">
                 百家樂是世界上最受歡迎的賭場遊戲之一，規則簡單易懂，適合各種程度的玩家。本教學將從零開始，詳細介紹百家樂的規則、玩法、點數計算等基礎知識。
               </p>

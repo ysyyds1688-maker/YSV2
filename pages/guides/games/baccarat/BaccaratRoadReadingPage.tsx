@@ -44,6 +44,16 @@ export const BaccaratRoadReadingPage = () => {
             </h1>
             
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12">
+              {/* Hero Image */}
+              <div 
+                className="w-full h-64 rounded-xl mb-8 bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url(/images/guides/baccarat-road-reading.jpg)',
+                }}
+              >
+                <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent rounded-xl"></div>
+              </div>
+              
               <p className="text-lg text-slate-300 mb-8 leading-relaxed">
                 看路法是百家樂中最重要的技巧之一。通過觀察歷史開獎結果的路單，玩家可以判斷趨勢、制定下注策略。本教學將深入解析大路、小路、蟑螂路等各種路單的判讀技巧。
               </p>

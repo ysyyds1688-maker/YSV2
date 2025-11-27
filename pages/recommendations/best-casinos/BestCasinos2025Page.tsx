@@ -104,14 +104,24 @@ export const BestCasinos2025Page = () => {
             {casinos.map((casino, index) => (
               <div
                 key={casino.name}
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 transition-all"
+                className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all"
               >
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <div className="flex items-center mb-2">
-                      <span className="text-2xl font-black text-white mr-3">#{index + 1}</span>
-                      <h3 className="text-2xl font-bold text-white">{casino.name}</h3>
-                    </div>
+                {/* Casino Cover Image */}
+                <div 
+                  className="w-full h-48 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(/images/recommendations/casino-${index + 1}.jpg)`,
+                  }}
+                >
+                  <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent"></div>
+                </div>
+                <div className="p-8">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <div className="flex items-center mb-2">
+                        <span className="text-2xl font-black text-white mr-3">#{index + 1}</span>
+                        <h3 className="text-2xl font-bold text-white">{casino.name}</h3>
+                      </div>
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <Star
