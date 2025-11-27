@@ -16,7 +16,7 @@ export const SEO: React.FC<SEOProps> = ({
   title,
   description,
   keywords,
-  ogImage = '/og-image.jpg',
+        ogImage = '/images/og/og-image.png',
   ogType = 'website',
   canonical,
   structuredData,
