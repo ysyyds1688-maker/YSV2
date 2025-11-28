@@ -6,7 +6,7 @@ const YSLogo = () => (
     <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600 rounded-lg blur opacity-40 group-hover:opacity-100 transition duration-500 animate-pulse-glow"></div>
     <div className="relative flex items-center">
       <span className="text-3xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-fuchsia-400 mr-2 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]">
-        YS
+        MR9
       </span>
       <span className="font-bold text-white tracking-wide text-sm border-l-2 border-slate-600 pl-2 ml-1 hidden sm:block">
         娛樂論壇
@@ -19,13 +19,15 @@ export const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'YS 首頁' },
-    { path: '/games', label: '遊戲專區' },
-    { path: '/guides/games', label: '遊戲攻略' },
-    { path: '/guides/casino', label: '娛樂城攻略' },
-    { path: '/recommendations', label: '娛樂城推薦' },
-    { path: '/promotions', label: '優惠活動' },
-    { path: '/news', label: '最新消息' },
+    { path: '/', label: '首頁' },
+    { path: '/forum', label: '討論區' },
+    { path: '/games/sports', label: '體育' },
+    { path: '/games/baccarat', label: '真人' },
+    { path: '/games/lottery', label: '彩票' },
+    { path: '/games/poker', label: '棋牌' },
+    { path: '/games/electronic', label: '電子' },
+    { path: '/games/fishing', label: '捕魚' },
+    { path: '/promotions', label: '優惠' },
   ];
 
   const isActive = (path: string) => {
@@ -49,7 +51,7 @@ export const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                  className={`px-3 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
                     isActive(item.path)
                       ? 'text-cyan-950 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] scale-105'
                       : 'text-slate-400 hover:text-white hover:bg-slate-800'
@@ -68,16 +70,17 @@ export const Navbar = () => {
             <button className="md:hidden p-2 text-slate-400 hover:text-white">
               <Menu size={20} />
             </button>
-            <Link
-              to="/register"
+            <a
+              href="https://pc-mr9-sit.mr9.site/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden md:block bg-gradient-to-r from-fuchsia-600 to-purple-700 hover:from-fuchsia-500 hover:to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg shadow-fuchsia-900/50 border border-fuchsia-500/30 hover:scale-105 active:scale-95"
             >
-              VIP 登入
-            </Link>
+              前往 MR9
+            </a>
           </div>
         </div>
       </div>
     </nav>
   );
 };
-
