@@ -3,40 +3,96 @@ import { useParams } from 'react-router-dom';
 import { SEO } from '../../components/SEO';
 import { Breadcrumb } from '../../components/Breadcrumb';
 import { Link } from 'react-router-dom';
+import { FORUM_CATEGORIES, FORUM_TOPICS } from '../../data/mockForumData';
+import { Clock, Eye, MessageCircle, User, Hash } from 'lucide-react';
 
 export const ForumCategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   
+  // 找到當前分類資訊
+  const currentCategory = FORUM_CATEGORIES.find(c => c.id === category);
+  
+  // 篩選該分類下的文章
+  const topics = FORUM_TOPICS.filter(t => t.categoryId === category);
+
+  // 如果分類不存在，顯示錯誤或導回首頁（這裡簡單處理）
+  if (!currentCategory) {
+    return <div className="text-white text-center py-20">找不到該版塊</div>;
+  }
+
   return (
     <>
       <SEO 
-        title={`版塊 ${category} - YS 論壇`} 
-        description={`這是版塊 ${category} 的討論列表。`} 
+        title={`${currentCategory.name} - YS 論壇`} 
+        description={currentCategory.description} 
       />
       <div className="py-12 bg-slate-950 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[
             { name: '論壇首頁', url: '/forum' },
-            { name: `版塊 ${category}`, url: `/forum/c/${category}` }
+            { name: currentCategory.name, url: `/forum/c/${category}` }
           ]} />
           
-          <h1 className="text-3xl font-bold text-white mb-8">版塊 {category} 討論區</h1>
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-black text-white mb-2">{currentCategory.name}</h1>
+            <p className="text-slate-400 text-lg">{currentCategory.description}</p>
+          </div>
 
           <div className="space-y-4">
-            {[1, 2, 3, 4, 5].map((item) => (
-              <Link key={item} to={`/topic/topic-${item}`} className="block p-6 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition-colors">
-                <h3 className="text-xl font-bold text-white mb-2">討論主題範例 {item}</h3>
-                <div className="text-sm text-slate-400 flex gap-4">
-                  <span>作者: Admin</span>
-                  <span>回覆: {Math.floor(Math.random() * 100)}</span>
-                  <span>瀏覽: {Math.floor(Math.random() * 1000)}</span>
-                </div>
-              </Link>
-            ))}
+            {topics.length > 0 ? (
+              topics.map((topic) => (
+                <Link 
+                  key={topic.id} 
+                  to={`/topic/${topic.slug}`} 
+                  className="block p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-cyan-500/50 hover:bg-slate-800/50 transition-all duration-300 group"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center gap-4 justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                        {topic.title}
+                      </h3>
+                      <p className="text-slate-400 text-sm line-clamp-2 mb-3 md:mb-0 pr-4">
+                        {topic.summary}
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 text-xs text-slate-500 shrink-0">
+                      <div className="flex items-center gap-1 bg-slate-800 px-3 py-1 rounded-full">
+                        <User size={12} />
+                        <span className="text-slate-300">{topic.author}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                         <span className="flex items-center gap-1" title="發布時間">
+                          <Clock size={14} /> {topic.date}
+                        </span>
+                        <span className="flex items-center gap-1" title="瀏覽次數">
+                          <Eye size={14} /> {topic.views}
+                        </span>
+                        <span className="flex items-center gap-1" title="回覆數">
+                          <MessageCircle size={14} /> {topic.replies}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Tags */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {topic.tags.map((tag, idx) => (
+                       <span key={idx} className="inline-flex items-center gap-1 px-2 py-1 bg-slate-800/50 text-cyan-500/80 text-xs rounded border border-slate-700/50">
+                         <Hash size={10} /> {tag}
+                       </span>
+                    ))}
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="text-center py-20 bg-slate-900/50 rounded-xl border border-slate-800 border-dashed">
+                <p className="text-slate-500">此版塊目前尚無話題，敬請期待。</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </>
   );
 };
-
