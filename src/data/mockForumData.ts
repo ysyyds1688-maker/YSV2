@@ -10,6 +10,7 @@ export interface ForumTopic {
   tags: string[];
   summary: string;
   content: string; // 這裡存儲 HTML 內容或 Markdown
+  image: string; // 新增圖片欄位
 }
 
 export interface ForumCategory {
@@ -58,6 +59,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 45,
     tags: ['娛樂城推薦', '出金實測', '2025排名'],
     summary: '經過團隊實測，整理出 2025 年最值得遊玩的十大娛樂城。我們針對出金速度、遊戲種類、客服品質進行了全方位的評比...',
+    image: '/images/recommendations/casino-1.jpg',
     content: `
       <h2>為什麼選擇正確的娛樂城很重要？</h2>
       <p>在網路上搜尋娛樂城，成千上萬的結果讓人眼花撩亂。選錯平台不僅可能遇到不出金的詐騙，還可能因為遊戲公平性問題而輸得不明不白。本篇評測旨在幫助玩家避開黑網，找到真正安全、好玩的平台。</p>
@@ -87,6 +89,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 32,
     tags: ['百家樂', '看路法', '三珠路'],
     summary: '三珠路是百家樂高階玩家常用的看路技巧。本文詳細解析如何繪製三珠路，以及如何利用它來判斷下注時機...',
+    image: '/images/guides/baccarat-road-reading.jpg',
     content: `
       <h2>什麼是三珠路？</h2>
       <p>三珠路是一種將大路結果每三局分為一組的記錄方式。通過觀察每一組的莊閒分佈，我們可以發現某種規律的重複或破壞。</p>
@@ -113,6 +116,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 88,
     tags: ['體驗金', '免儲值', '限時優惠'],
     summary: 'YS 娛樂城最新限時活動！新會員註冊並完成身份驗證，即可向客服申請 168 體驗金。流水僅需 1 倍，贏錢可直接提領！',
+    image: '/images/promotions/welcome-bonus.jpg',
     content: `
       <h2>活動詳情</h2>
       <p>為了回饋新玩家，本站特別推出限時體驗金活動。不同於其他平台的高流水要求，我們主打「真實體驗」。</p>
@@ -140,6 +144,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 12,
     tags: ['老虎機', 'RTP', '選台技巧'],
     summary: '為什麼你的老虎機總是只咬不吐？可能你選錯了機台！本文教你如何查詢機台 RTP，以及判斷機台是否處於吐分期。',
+    image: '/images/articles/slots-rtp-guide.jpg',
     content: `
       <h2>RTP 的重要性</h2>
       <p>RTP (Return to Player) 代表機台的理論回報率。選擇 RTP 高於 96% 的機台，長期下來你的虧損會顯著減少。</p>
@@ -159,6 +164,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 28,
     tags: ['心態調整', '資金管理', '運彩'],
     summary: '運彩贏錢靠的不是運氣，而是心態與資金管理。輸錢了想凹回來？這就是你破產的開始。',
+    image: '/images/articles/sports-bankroll.jpg',
     content: `
       <h2>均注法 vs 倍投法</h2>
       <p>對於新手玩家，我們強烈建議使用「均注法」。將你的總資金分成 100 等份，每場比賽只下注 1-2 份。這樣即使遭遇連敗，也不會傷筋動骨。</p>
@@ -168,4 +174,3 @@ export const FORUM_TOPICS: ForumTopic[] = [
     `
   }
 ];
-
