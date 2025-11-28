@@ -2,7 +2,7 @@ import React from 'react';
 import { SEO } from '../../components/SEO';
 import { Breadcrumb } from '../../components/Breadcrumb';
 import { Link } from 'react-router-dom';
-import { FORUM_CATEGORIES, FORUM_TOPICS } from '../../data/mockForumData';
+import { FORUM_CATEGORIES, FORUM_TOPICS } from '@/data/mockForumData';
 import { MessageSquare, Star, BookOpen, Gift, TrendingUp, Clock, Eye, MessageCircle } from 'lucide-react';
 
 const IconMap: Record<string, React.ElementType> = {

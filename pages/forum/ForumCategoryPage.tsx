@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { SEO } from '../../components/SEO';
 import { Breadcrumb } from '../../components/Breadcrumb';
 import { Link } from 'react-router-dom';
-import { FORUM_CATEGORIES, FORUM_TOPICS } from '../../data/mockForumData';
+import { FORUM_CATEGORIES, FORUM_TOPICS } from '@/data/mockForumData';
 import { Clock, Eye, MessageCircle, User, Hash } from 'lucide-react';
 
 export const ForumCategoryPage = () => {
