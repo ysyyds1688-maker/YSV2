@@ -1,308 +1,209 @@
-import { SEO } from '../components/SEO';
-import { ArrowRight, Trophy, BarChart3, ShieldCheck, ChevronRight, Users, Lock } from 'lucide-react';
+import React from 'react';
+import { SEO } from '../../components/SEO';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Star, Shield, Smartphone, Trophy } from 'lucide-react';
+
+const games = [
+  { name: 'TOP 體育', category: '體育賽事', image: '/images/games/sports-hero.jpg', link: '/games/sports' },
+  { name: 'DG 真人', category: '真人視訊', image: '/images/baccarat/baccarat-cover.png', link: '/games/baccarat' },
+  { name: '88SOFT 電子', category: '電子遊戲', image: '/images/games/slots-hero.jpg', link: '/games/electronic' },
+  { name: '高登棋牌', category: '棋牌對戰', image: '/images/games/poker-hero.jpg', link: '/games/poker' },
+];
+
+const articles = [
+  {
+    id: '1',
+    title: 'TOP 體育 vs 熊貓體育：賠率實測大公開',
+    category: '遊戲攻略',
+    date: '2025-11-28',
+    image: '/images/articles/sports-analysis.jpg',
+    link: '/topic/mr9-sports-odds-review'
+  },
+  {
+    id: '2',
+    title: 'DG 真人百家樂：多檯監控抓龍技巧',
+    category: '真人攻略',
+    date: '2025-11-26',
+    image: '/images/guides/baccarat-road-reading.jpg',
+    link: '/topic/dg-baccarat-road-reading'
+  },
+  {
+    id: '3',
+    title: 'MR9 新手福利：體驗金與首存紅利全攻略',
+    category: '優惠情報',
+    date: '2025-11-25',
+    image: '/images/promotions/welcome-bonus.jpg',
+    link: '/topic/mr9-welcome-bonus-guide'
+  }
+];
 
 export const HomePage = () => {
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'YS 娛樂城',
-    description: 'YS 娛樂城提供體驗金168、快速出金、安全可靠的線上娛樂服務',
-    url: 'https://ys-entertainment.com',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://ys-entertainment.com/search?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
-  };
-
   return (
     <>
-      <SEO
-        title="YS 娛樂城｜體驗金168・快速出金"
-        description="YS 娛樂城提供體驗金168、快速出金、安全可靠的線上娛樂服務。包含電子遊戲、真人百家樂、體育投注、棋牌遊戲等多種遊戲選擇。"
-        keywords="娛樂城,線上娛樂城,體驗金,出金安全,YS娛樂城,體驗金168,快速出金"
-        canonical="/"
-        structuredData={structuredData}
+      <SEO 
+        title="MR9 娛樂城論壇 - 亞洲頂級博弈玩家交流區" 
+        description="專為 MR9 玩家打造的交流論壇。提供 TOP 體育賠率分析、DG 真人百家樂攻略、88SOFT 電子爆分技巧以及最新優惠情報。" 
+        keywords="MR9論壇, MR9娛樂城, TOP體育, DG真人, 88SOFT電子, 娛樂城評價"
       />
       
-      <div className="min-h-screen bg-slate-950 animate-fade-in-up">
-        {/* Hero Section with Banner */}
-        <div className="relative pt-20 pb-32 overflow-hidden">
-          {/* Banner Background Image */}
-          <div className="absolute inset-0 z-0">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: 'url(/images/home-banner.png)',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-              }}
-            >
-              {/* Dark overlay for text readability - lighter overlay to show image */}
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/30 to-slate-950/60"></div>
-            </div>
-            {/* Fallback gradient if image not loaded */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-cyan-950/20 to-fuchsia-950/20"></div>
+      {/* Hero Section with Banner */}
+      <div className="relative h-[500px] sm:h-[600px] overflow-hidden group">
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+          style={{ 
+            backgroundImage: 'url("/images/home-banner.png")',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/30 to-slate-950"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center z-10 pt-20">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-bold mb-6 animate-fade-in-up">
+            <Star size={16} className="mr-2 fill-cyan-400" /> 
+            2025 亞洲最佳娛樂城論壇
           </div>
-          
-          {/* Animated Blob Effects (overlay) */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-30 pointer-events-none z-0">
-            <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-            <div className="absolute top-20 right-20 w-72 h-72 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
-          </div>
-          
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-            <div className="inline-flex items-center px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-cyan-400 text-sm font-bold mb-8 backdrop-blur-sm">
-              <span className="flex h-2 w-2 rounded-full bg-cyan-400 mr-2 animate-pulse"></span>
-              體驗金168 限時優惠中
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8">
-              <span className="block mb-2">YS 娛樂城</span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-white to-fuchsia-500 drop-shadow-[0_0_15px_rgba(216,180,254,0.3)]">
-                體驗金168・快速出金
-              </span>
-            </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-xl text-slate-400 mb-10 leading-relaxed">
-              全台最安全可靠的線上娛樂平台，提供體驗金168、秒出金服務，包含電子遊戲、真人百家樂、體育投注等多種遊戲選擇。
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link 
-                to="/register"
-                className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full text-white font-bold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transform hover:-translate-y-1 hover:scale-105 transition-all flex items-center justify-center group"
-              >
-                立即註冊領取體驗金 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20}/>
-              </Link>
-              <Link 
-                to="/games"
-                className="px-8 py-4 bg-slate-800 border border-slate-700 rounded-full text-white font-bold hover:bg-slate-700 hover:border-slate-600 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-slate-700/30"
-              >
-                瀏覽遊戲
-              </Link>
-            </div>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            MR9 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">娛樂論壇</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            匯集全台高手，獨家揭秘 <span className="text-cyan-400 font-bold">TOP 體育</span> 賠率優勢與 <span className="text-fuchsia-400 font-bold">DG 真人</span> 必勝攻略。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <Link to="/forum" className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full text-white font-bold text-lg hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all hover:scale-105 flex items-center justify-center">
+              進入討論區 <ArrowRight size={20} className="ml-2" />
+            </Link>
+            <Link to="/games/sports" className="px-8 py-4 bg-slate-800/80 backdrop-blur-sm border border-slate-600 rounded-full text-white font-bold text-lg hover:bg-slate-700 transition-all hover:scale-105 flex items-center justify-center">
+              查看遊戲攻略
+            </Link>
           </div>
         </div>
+      </div>
 
-        {/* Feature Grid */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 pb-20">
+      {/* Features Section */}
+      <div className="py-16 bg-slate-950 border-b border-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1: 體驗金 */}
-            <div className="stagger-item bg-slate-900/80 backdrop-blur border border-slate-800 p-8 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer hover:bg-slate-800 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(6,182,212,0.3)]" style={{ animationDelay: '100ms' }}>
-              <div className="w-14 h-14 bg-cyan-900/30 rounded-xl flex items-center justify-center mb-6 border border-cyan-500/20 group-hover:bg-cyan-500/20 group-hover:scale-110 transition-all duration-300">
-                <Trophy className="text-cyan-400 group-hover:text-cyan-300" size={32} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">體驗金168</h3>
-              <p className="text-slate-400 mb-4 group-hover:text-slate-300">新會員註冊即送體驗金168，無需存款即可體驗多種遊戲。</p>
-              <Link to="/promotions" className="text-cyan-400 font-bold text-sm flex items-center group-hover:translate-x-1 transition-transform">
-                查看優惠 <ChevronRight size={16} />
-              </Link>
+            <div className="p-6 bg-slate-900/50 rounded-2xl border border-slate-800 hover:border-cyan-500/30 transition-colors">
+              <Trophy className="w-12 h-12 text-amber-400 mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">極速存提款實測</h3>
+              <p className="text-slate-400">我們實測了 MR9 的出金速度，平均 3-5 分鐘到帳，支援 USDT 與多種支付方式。</p>
             </div>
-
-            {/* Card 2: 快速出金 */}
-            <div className="stagger-item bg-slate-900/80 backdrop-blur border border-slate-800 p-8 rounded-2xl hover:border-fuchsia-500/50 transition-all duration-300 group cursor-pointer hover:bg-slate-800 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(217,70,239,0.3)]" style={{ animationDelay: '200ms' }}>
-              <div className="w-14 h-14 bg-fuchsia-900/30 rounded-xl flex items-center justify-center mb-6 border border-fuchsia-500/20 group-hover:bg-fuchsia-500/20 group-hover:scale-110 transition-all duration-300">
-                <BarChart3 className="text-fuchsia-400 group-hover:text-fuchsia-300" size={32} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-fuchsia-400 transition-colors">秒出金服務</h3>
-              <p className="text-slate-400 mb-4 group-hover:text-slate-300">業界最快出金速度，5分鐘內到帳，支援USDT等多種支付方式。</p>
-              <Link to="/guides/withdrawal" className="text-fuchsia-400 font-bold text-sm flex items-center group-hover:translate-x-1 transition-transform">
-                了解出金流程 <ChevronRight size={16} />
-              </Link>
+            <div className="p-6 bg-slate-900/50 rounded-2xl border border-slate-800 hover:border-cyan-500/30 transition-colors">
+              <Shield className="w-12 h-12 text-cyan-400 mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">專業遊戲設計</h3>
+              <p className="text-slate-400">收錄 TOP 體育、DG 真人、88SOFT 電子等頂級平台，提供最公平公正的遊戲環境。</p>
             </div>
-
-            {/* Card 3: 安全保障 */}
-            <div className="stagger-item bg-slate-900/80 backdrop-blur border border-slate-800 p-8 rounded-2xl hover:border-emerald-500/50 transition-all duration-300 group cursor-pointer hover:bg-slate-800 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(16,185,129,0.3)]" style={{ animationDelay: '300ms' }}>
-              <div className="w-14 h-14 bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 border border-emerald-500/20 group-hover:bg-emerald-500/20 group-hover:scale-110 transition-all duration-300">
-                <ShieldCheck className="text-emerald-400 group-hover:text-emerald-300" size={32} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">出金安全保障</h3>
-              <p className="text-slate-400 mb-4 group-hover:text-slate-300">SSL加密認證、第三方稽核，保障您的資金安全與個人隱私。</p>
-              <Link to="/trust/security" className="text-emerald-400 font-bold text-sm flex items-center group-hover:translate-x-1 transition-transform">
-                查看保障 <ChevronRight size={16} />
-              </Link>
+            <div className="p-6 bg-slate-900/50 rounded-2xl border border-slate-800 hover:border-cyan-500/30 transition-colors">
+              <Smartphone className="w-12 h-12 text-fuchsia-400 mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">行動端完美支援</h3>
+              <p className="text-slate-400">專屬 APP 下載，支援 iOS 與 Android，隨時隨地暢玩所有遊戲。</p>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* 遊戲入口 */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <h2 className="text-3xl font-bold text-white text-center mb-12">熱門遊戲專區</h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[
-              { name: '電子遊戲', url: '/games/slots', icon: '🎰', image: '/images/games/slots.png' },
-              { name: '真人百家樂', url: '/games/baccarat', icon: '🃏', image: '/images/games/baccarat.png' },
-              { name: '體育投注', url: '/games/sports', icon: '⚽', image: '/images/games/sports.png' },
-              { name: '棋牌遊戲', url: '/games/poker', icon: '🀄', image: '/images/games/poker.png' },
-              { name: '彩票', url: '/games/lottery', icon: '🎫', image: '/images/games/lottery.png' },
-            ].map((game) => (
-              <Link
-                key={game.url}
-                to={game.url}
-                className="bg-slate-900 border border-slate-800 p-6 rounded-xl text-center hover:border-cyan-500/50 hover:bg-slate-800 transition-all group relative overflow-hidden"
-              >
-                {/* Background Image (optional, falls back to emoji if image not found) */}
+      {/* Game Categories */}
+      <div className="py-20 bg-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">MR9 熱門遊戲</h2>
+              <p className="text-slate-400 text-lg">精選最受歡迎的遊戲平台與攻略</p>
+            </div>
+            <Link to="/games" className="hidden md:flex items-center text-cyan-400 hover:text-cyan-300 font-bold transition-colors">
+              全部遊戲 <ArrowRight size={20} className="ml-2" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {games.map((game, index) => (
+              <Link key={index} to={game.link} className="group relative h-80 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
                 <div 
-                  className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url("${game.image}")`,
-                  }}
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ backgroundImage: `url("${game.image}")` }}
                 ></div>
-                <div className="relative z-10">
-                  <div className="text-4xl mb-3">{game.icon}</div>
-                  <div className="text-white font-bold group-hover:text-cyan-400 transition-colors">{game.name}</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-75 transition-opacity"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                  <span className="text-cyan-400 text-xs font-bold tracking-wider uppercase mb-2 block">{game.category}</span>
+                  <h3 className="text-2xl font-black text-white mb-2">{game.name}</h3>
+                  <div className="w-12 h-1 bg-cyan-500 rounded-full group-hover:w-full transition-all duration-300"></div>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
-
-        {/* 遊戲攻略與娛樂城推薦入口 */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-            <Link
-              to="/guides/games"
-              className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border border-cyan-500/30 rounded-2xl p-8 hover:border-cyan-400/50 hover:bg-cyan-900/40 transition-all group"
-            >
-              <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">遊戲攻略中心</h2>
-              <p className="text-slate-300 mb-4">從基礎到進階，完整的遊戲攻略教學</p>
-              <div className="flex items-center text-cyan-400 font-bold text-sm">
-                查看攻略 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-            <Link
-              to="/recommendations"
-              className="bg-gradient-to-br from-fuchsia-900/30 to-purple-900/30 border border-fuchsia-500/30 rounded-2xl p-8 hover:border-fuchsia-400/50 hover:bg-fuchsia-900/40 transition-all group"
-            >
-              <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-fuchsia-400 transition-colors">娛樂城推薦</h2>
-              <p className="text-slate-300 mb-4">2025年最佳娛樂城推薦與評比</p>
-              <div className="flex items-center text-fuchsia-400 font-bold text-sm">
-                查看推薦 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </div>
+          
+          <div className="mt-8 text-center md:hidden">
+            <Link to="/games" className="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-bold">
+              全部遊戲 <ArrowRight size={20} className="ml-2" />
             </Link>
           </div>
         </div>
+      </div>
 
-        {/* 最新攻略文章串接 */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-white">最新攻略文章</h2>
-            <Link to="/guides/games" className="text-cyan-400 hover:text-cyan-300 font-bold text-sm">
-              查看全部 →
-            </Link>
+      {/* Latest Forum Topics */}
+      <div className="py-20 bg-slate-900 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/grid-pattern.svg')] opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">MR9 玩家熱議</h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              不錯過任何關於 TOP 體育、DG 真人與優惠活動的最新情報
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { 
-                title: '百家樂看路法完整教學', 
-                url: '/guides/games/baccarat/road-reading', 
-                category: '百家樂', 
-                readTime: '8 min',
-                image: '/images/articles/baccarat-road-reading.jpg'
-              },
-              { 
-                title: '老虎機 RTP 選擇指南', 
-                url: '/guides/games/slots/rtp-guide', 
-                category: '老虎機', 
-                readTime: '6 min',
-                image: '/images/articles/slots-rtp-guide.jpg'
-              },
-              { 
-                title: '體育投注資金管理法', 
-                url: '/guides/games/sports/bankroll-management', 
-                category: '體育投注', 
-                readTime: '10 min',
-                image: '/images/articles/sports-bankroll.jpg'
-              },
-            ].map((article) => (
-              <Link
-                key={article.url}
-                to={article.url}
-                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
-              >
-                {/* Article Cover Image */}
-                <div 
-                  className="w-full h-40 bg-cover bg-center relative"
-                  style={{
-                    backgroundImage: `url("${article.image}")`,
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                  <span className="absolute top-3 left-3 px-2 py-1 bg-cyan-600/80 backdrop-blur-sm text-cyan-100 text-xs font-bold rounded">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <Link key={article.id} to={article.link} className="group block bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20">
+                <div className="relative h-48 overflow-hidden">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url("${article.image}")` }}
+                  ></div>
+                  <div className="absolute top-4 left-4 bg-cyan-600/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full">
                     {article.category}
-                  </span>
+                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                  <div className="flex items-center text-slate-500 text-xs mb-3">
+                    <Clock size={12} className="mr-1" /> {article.date}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors">
                     {article.title}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-slate-500">{article.readTime}</span>
-                    <ArrowRight size={14} className="text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                  <div className="flex items-center text-cyan-500 text-sm font-bold">
+                    閱讀全文 <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
-
-        {/* 新手教學入口 */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <h2 className="text-3xl font-bold text-white text-center mb-12">新手教學</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { name: '如何註冊', url: '/guides/register', desc: '快速註冊流程教學' },
-              { name: '如何出金', url: '/guides/withdrawal', desc: '出金步驟詳解' },
-              { name: 'USDT儲值', url: '/guides/usdt-deposit', desc: '加密貨幣儲值教學' },
-              { name: '忘記密碼', url: '/guides/forgot-password', desc: '密碼重置指南' },
-            ].map((guide) => (
-              <Link
-                key={guide.url}
-                to={guide.url}
-                className="bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-fuchsia-500/50 hover:bg-slate-800 transition-all group"
-              >
-                <h3 className="text-white font-bold mb-2 group-hover:text-fuchsia-400 transition-colors">{guide.name}</h3>
-                <p className="text-slate-400 text-sm">{guide.desc}</p>
-              </Link>
-            ))}
+          
+          <div className="mt-12 text-center">
+            <Link to="/forum" className="inline-flex items-center px-8 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-full text-white font-bold transition-all">
+              進入討論區查看更多
+            </Link>
           </div>
         </div>
+      </div>
 
-        {/* APP 下載 */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-8 md:p-12 text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">下載 YS 娛樂城 APP</h2>
-            <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-              隨時隨地享受遊戲樂趣，支援 iOS 與 Android 系統，安全快速，體驗更流暢
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="px-6 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white font-bold hover:bg-slate-700 transition-all flex items-center justify-center">
-                <span className="mr-2">📱</span>
-                iOS 下載
-              </button>
-              <button className="px-6 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white font-bold hover:bg-slate-700 transition-all flex items-center justify-center">
-                <span className="mr-2">🤖</span>
-                Android 下載
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="border-t border-slate-900 py-12 bg-slate-950">
-          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-500">
-            <div className="flex items-center space-x-2 group cursor-default">
-              <ShieldCheck size={24} className="text-cyan-500 group-hover:scale-110 transition-transform" />
-              <span className="text-lg font-bold text-slate-300 group-hover:text-white">SSL 加密認證</span>
-            </div>
-            <div className="flex items-center space-x-2 group cursor-default">
-              <Users size={24} className="text-fuchsia-500 group-hover:scale-110 transition-transform" />
-              <span className="text-lg font-bold text-slate-300 group-hover:text-white">10,000+ 會員見證</span>
-            </div>
-            <div className="flex items-center space-x-2 group cursor-default">
-              <Lock size={24} className="text-emerald-500 group-hover:scale-110 transition-transform" />
-              <span className="text-lg font-bold text-slate-300 group-hover:text-white">公正第三方稽核</span>
-            </div>
+      {/* App Download CTA */}
+      <div className="py-20 bg-gradient-to-r from-blue-900 to-cyan-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-20 mix-blend-overlay"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6">
+            隨時隨地，暢玩 MR9
+          </h2>
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+            下載 MR9 專屬 APP，支援 iOS 與 Android。體驗極速存提款，不錯過任何一場 TOP 體育賽事。
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <button className="px-8 py-4 bg-white text-blue-900 rounded-xl font-bold text-lg hover:bg-blue-50 transition-colors flex items-center justify-center shadow-lg">
+              <Smartphone className="mr-2" /> 下載 iOS 版本
+            </button>
+            <button className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center">
+              <Smartphone className="mr-2" /> 下載 Android 版本
+            </button>
           </div>
         </div>
       </div>
@@ -310,3 +211,21 @@ export const HomePage = () => {
   );
 };
 
+// 為了避免在 HomePage 中重新定義，這裡簡單模擬 Clock icon，實際應該 import
+const Clock = ({ size, className }: { size: number, className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <polyline points="12 6 12 12 16 14"></polyline>
+  </svg>
+);
