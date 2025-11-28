@@ -6,7 +6,7 @@ const YSLogo = () => (
     <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600 rounded-lg blur opacity-40 group-hover:opacity-100 transition duration-500 animate-pulse-glow"></div>
     <div className="relative flex items-center">
       <span className="text-3xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-fuchsia-400 mr-2 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]">
-        MR9
+        YS
       </span>
       <span className="font-bold text-white tracking-wide text-sm border-l-2 border-slate-600 pl-2 ml-1 hidden sm:block">
         娛樂論壇
@@ -23,10 +23,8 @@ export const Navbar = () => {
     { path: '/forum', label: '討論區' },
     { path: '/games/sports', label: '體育' },
     { path: '/games/baccarat', label: '真人' },
-    { path: '/games/lottery', label: '彩票' },
-    { path: '/games/poker', label: '棋牌' },
     { path: '/games/electronic', label: '電子' },
-    { path: '/games/fishing', label: '捕魚' },
+    { path: '/games/poker', label: '棋牌' },
     { path: '/promotions', label: '優惠' },
   ];
 
@@ -70,14 +68,12 @@ export const Navbar = () => {
             <button className="md:hidden p-2 text-slate-400 hover:text-white">
               <Menu size={20} />
             </button>
-            <a
-              href="https://pc-mr9-sit.mr9.site/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/register"
               className="hidden md:block bg-gradient-to-r from-fuchsia-600 to-purple-700 hover:from-fuchsia-500 hover:to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg shadow-fuchsia-900/50 border border-fuchsia-500/30 hover:scale-105 active:scale-95"
             >
-              前往 MR9
-            </a>
+              會員登入
+            </Link>
           </div>
         </div>
       </div>
