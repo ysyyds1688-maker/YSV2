@@ -62,6 +62,10 @@ import { BestCasinos2025Page } from './pages/recommendations/best-casinos/BestCa
 import { FastWithdrawalPage } from './pages/recommendations/best-casinos/FastWithdrawalPage';
 import { HighBonusPage } from './pages/recommendations/best-casinos/HighBonusPage';
 import { USDTFriendlyPage } from './pages/recommendations/best-casinos/USDTFriendlyPage';
+// 論壇頁面
+import { ForumIndexPage } from './pages/forum/ForumIndexPage';
+import { ForumCategoryPage } from './pages/forum/ForumCategoryPage';
+import { TopicPage } from './pages/forum/TopicPage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 
@@ -148,6 +152,11 @@ export default function App() {
               {/* 優惠活動 */}
               <Route path="/promotions" element={<PromotionsPage />} />
               <Route path="/promotions/monthly/:year/:month" element={<MonthlyPromotionsPage />} />
+
+              {/* 論壇專區 */}
+              <Route path="/forum" element={<ForumIndexPage />} />
+              <Route path="/forum/c/:category" element={<ForumCategoryPage />} />
+              <Route path="/topic/:slug" element={<TopicPage />} />
 
               {/* 最新消息 */}
               <Route path="/news" element={<NewsPage />} />
