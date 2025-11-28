@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { SEO } from '../../components/SEO';
 import { Breadcrumb } from '../../components/Breadcrumb';
-import { FORUM_CATEGORIES, FORUM_TOPICS } from '@/data/mockForumData';
+import { FORUM_TOPICS, FORUM_CATEGORIES } from '@/data/mockForumData';
 import { Clock, Eye, MessageCircle, User, Calendar, Tag, Share2, ThumbsUp } from 'lucide-react';
 
 export const TopicPage = () => {
@@ -36,8 +36,17 @@ export const TopicPage = () => {
             {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden mb-8">
-                {/* Article Header */}
-                <div className="p-8 border-b border-slate-800 bg-slate-900/50">
+                
+                {/* Featured Image */}
+                <div 
+                  className="w-full h-64 md:h-96 bg-cover bg-center"
+                  style={{ backgroundImage: `url("${topic.image}")` }}
+                >
+                  <div className="w-full h-full bg-gradient-to-t from-slate-900 to-transparent opacity-90"></div>
+                </div>
+
+                {/* Article Header - Now overlaying or below image */}
+                <div className="px-8 py-6 border-b border-slate-800 bg-slate-900 -mt-20 relative z-10 mx-4 rounded-t-2xl border-t border-x shadow-xl">
                    <div className="flex items-center gap-2 mb-4">
                       <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 text-xs rounded-full border border-cyan-500/30 font-medium">
                         {category?.name}
@@ -70,7 +79,7 @@ export const TopicPage = () => {
                 </div>
 
                 {/* Article Body */}
-                <div className="p-8 prose prose-invert prose-lg max-w-none">
+                <div className="p-8 prose prose-invert prose-lg max-w-none bg-slate-900">
                   {/* 使用 dangerouslySetInnerHTML 渲染 HTML 內容 */}
                   <div dangerouslySetInnerHTML={{ __html: topic.content }} />
                 </div>
@@ -135,10 +144,18 @@ export const TopicPage = () => {
                  <div className="space-y-4">
                    {FORUM_TOPICS.filter(t => t.id !== topic.id).slice(0, 3).map(t => (
                      <Link key={t.id} to={`/topic/${t.slug}`} className="block group">
-                       <h4 className="text-sm font-medium text-slate-300 group-hover:text-cyan-400 transition-colors line-clamp-2 mb-1">
-                         {t.title}
-                       </h4>
-                       <span className="text-xs text-slate-500">{t.views} 次瀏覽</span>
+                       <div className="flex gap-3">
+                          <div 
+                            className="w-16 h-16 bg-cover bg-center rounded-lg shrink-0 border border-slate-700"
+                            style={{ backgroundImage: `url("${t.image}")` }}
+                          ></div>
+                          <div>
+                            <h4 className="text-sm font-medium text-slate-300 group-hover:text-cyan-400 transition-colors line-clamp-2 mb-1">
+                              {t.title}
+                            </h4>
+                            <span className="text-xs text-slate-500">{t.views} 次瀏覽</span>
+                          </div>
+                       </div>
                      </Link>
                    ))}
                  </div>

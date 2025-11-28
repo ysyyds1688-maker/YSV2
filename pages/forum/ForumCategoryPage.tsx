@@ -44,44 +44,57 @@ export const ForumCategoryPage = () => {
                 <Link 
                   key={topic.id} 
                   to={`/topic/${topic.slug}`} 
-                  className="block p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-cyan-500/50 hover:bg-slate-800/50 transition-all duration-300 group"
+                  className="block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-500/50 hover:bg-slate-800/50 transition-all duration-300 group"
                 >
-                  <div className="flex flex-col md:flex-row md:items-center gap-4 justify-between">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                        {topic.title}
-                      </h3>
-                      <p className="text-slate-400 text-sm line-clamp-2 mb-3 md:mb-0 pr-4">
-                        {topic.summary}
-                      </p>
+                   <div className="flex flex-col md:flex-row h-full">
+                    {/* Thumbnail */}
+                    <div className="md:w-64 h-48 md:h-auto relative shrink-0">
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                        style={{ backgroundImage: `url("${topic.image}")` }}
+                      />
+                      <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors" />
                     </div>
-                    
-                    <div className="flex items-center gap-4 text-xs text-slate-500 shrink-0">
-                      <div className="flex items-center gap-1 bg-slate-800 px-3 py-1 rounded-full">
-                        <User size={12} />
-                        <span className="text-slate-300">{topic.author}</span>
+
+                    <div className="flex-1 p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                          {topic.title}
+                        </h3>
+                        <p className="text-slate-400 text-sm line-clamp-2 mb-3 pr-4">
+                          {topic.summary}
+                        </p>
                       </div>
-                      <div className="flex items-center gap-3">
-                         <span className="flex items-center gap-1" title="發布時間">
-                          <Clock size={14} /> {topic.date}
-                        </span>
-                        <span className="flex items-center gap-1" title="瀏覽次數">
-                          <Eye size={14} /> {topic.views}
-                        </span>
-                        <span className="flex items-center gap-1" title="回覆數">
-                          <MessageCircle size={14} /> {topic.replies}
-                        </span>
+                      
+                      <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {topic.tags.map((tag, idx) => (
+                             <span key={idx} className="inline-flex items-center gap-1 px-2 py-1 bg-slate-800/50 text-cyan-500/80 text-xs rounded border border-slate-700/50">
+                               <Hash size={10} /> {tag}
+                             </span>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center gap-4 text-xs text-slate-500 shrink-0">
+                          <div className="flex items-center gap-1 bg-slate-800 px-3 py-1 rounded-full">
+                            <User size={12} />
+                            <span className="text-slate-300">{topic.author}</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                             <span className="flex items-center gap-1" title="發布時間">
+                              <Clock size={14} /> {topic.date}
+                            </span>
+                            <span className="flex items-center gap-1" title="瀏覽次數">
+                              <Eye size={14} /> {topic.views}
+                            </span>
+                            <span className="flex items-center gap-1" title="回覆數">
+                              <MessageCircle size={14} /> {topic.replies}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  {/* Tags */}
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {topic.tags.map((tag, idx) => (
-                       <span key={idx} className="inline-flex items-center gap-1 px-2 py-1 bg-slate-800/50 text-cyan-500/80 text-xs rounded border border-slate-700/50">
-                         <Hash size={10} /> {tag}
-                       </span>
-                    ))}
                   </div>
                 </Link>
               ))

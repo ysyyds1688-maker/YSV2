@@ -74,26 +74,39 @@ export const ForumIndexPage = () => {
                   <Link 
                     key={topic.id} 
                     to={`/topic/${topic.slug}`}
-                    className="block bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-slate-700 hover:bg-slate-800/50 transition-all"
+                    className="block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 hover:bg-slate-800/50 transition-all"
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="px-2 py-1 bg-slate-800 text-cyan-400 text-xs rounded font-medium">
-                            {FORUM_CATEGORIES.find(c => c.id === topic.categoryId)?.name}
-                          </span>
-                          <span className="text-slate-500 text-xs flex items-center gap-1">
-                            <Clock size={12} />
-                            {topic.date}
-                          </span>
+                    <div className="flex flex-col sm:flex-row h-full">
+                       {/* Thumbnail */}
+                       <div className="sm:w-48 h-48 sm:h-auto relative shrink-0">
+                         <div 
+                           className="absolute inset-0 bg-cover bg-center"
+                           style={{ backgroundImage: `url("${topic.image}")` }}
+                         />
+                         <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
+                       </div>
+                       
+                       {/* Content */}
+                      <div className="flex-1 p-6 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="px-2 py-1 bg-slate-800 text-cyan-400 text-xs rounded font-medium">
+                              {FORUM_CATEGORIES.find(c => c.id === topic.categoryId)?.name}
+                            </span>
+                            <span className="text-slate-500 text-xs flex items-center gap-1">
+                              <Clock size={12} />
+                              {topic.date}
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-bold text-white mb-2 line-clamp-1 hover:text-cyan-400 transition-colors">
+                            {topic.title}
+                          </h3>
+                          <p className="text-slate-400 text-sm line-clamp-2 mb-4">
+                            {topic.summary}
+                          </p>
                         </div>
-                        <h3 className="text-lg font-bold text-white mb-2 line-clamp-1 hover:text-cyan-400 transition-colors">
-                          {topic.title}
-                        </h3>
-                        <p className="text-slate-400 text-sm line-clamp-2 mb-4">
-                          {topic.summary}
-                        </p>
-                        <div className="flex items-center gap-4 text-xs text-slate-500">
+                        
+                        <div className="flex items-center gap-4 text-xs text-slate-500 mt-auto">
                           <span className="flex items-center gap-1">
                             <span className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-white text-[10px]">
                               {topic.author[0]}
