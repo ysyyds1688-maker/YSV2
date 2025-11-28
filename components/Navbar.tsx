@@ -1,21 +1,20 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Menu } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 
 const YSLogo = () => (
   <div className="relative group flex items-center justify-center">
     <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600 rounded-lg blur opacity-40 group-hover:opacity-100 transition duration-500 animate-pulse-glow"></div>
     <div className="relative flex items-center">
-      <span className="text-3xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-fuchsia-400 mr-2 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]">
-        YS
-      </span>
-      <span className="font-bold text-white tracking-wide text-sm border-l-2 border-slate-600 pl-2 ml-1 hidden sm:block">
-        娛樂論壇
+      <span className="text-2xl md:text-3xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-fuchsia-400 mr-2 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]">
+        YS89.com
       </span>
     </div>
   </div>
 );
 
 export const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -65,8 +64,11 @@ export const Navbar = () => {
             <button className="p-2 text-slate-400 hover:text-cyan-400 transition-colors">
               <Search size={20} />
             </button>
-            <button className="md:hidden p-2 text-slate-400 hover:text-white">
-              <Menu size={20} />
+            <button 
+              className="md:hidden p-2 text-slate-400 hover:text-white"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
             <Link
               to="/register"
@@ -77,6 +79,35 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-slate-950 border-t border-slate-800">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  isActive(item.path)
+                    ? 'text-cyan-400 bg-slate-900'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              to="/register"
+              className="block w-full text-center mt-4 px-5 py-3 rounded-lg bg-gradient-to-r from-fuchsia-600 to-purple-700 text-white font-bold"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              會員登入
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
