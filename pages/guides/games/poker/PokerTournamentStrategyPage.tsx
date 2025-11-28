@@ -75,7 +75,7 @@ export const PokerTournamentStrategyPage = () => {
                 <h3 className="text-xl font-bold text-white mb-3">籌碼深度分類</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <p className="text-red-400 font-bold mb-2">短籌碼（< 20 BB）</p>
+                    <p className="text-red-400 font-bold mb-2">短籌碼（&lt; 20 BB）</p>
                     <ul className="list-disc pl-6 space-y-1 text-slate-300 text-sm">
                       <li>需要立即行動</li>
                       <li>尋找全押機會</li>
@@ -91,7 +91,7 @@ export const PokerTournamentStrategyPage = () => {
                     </ul>
                   </div>
                   <div>
-                    <p className="text-emerald-400 font-bold mb-2">深籌碼（> 50 BB）</p>
+                    <p className="text-emerald-400 font-bold mb-2">深籌碼（&gt; 50 BB）</p>
                     <ul className="list-disc pl-6 space-y-1 text-slate-300 text-sm">
                       <li>可以更靈活</li>
                       <li>可以玩更多起手牌</li>

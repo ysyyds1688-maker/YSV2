@@ -76,7 +76,7 @@ export const SportsOddsAnalysisPage = () => {
               <div className="bg-slate-800 rounded-lg p-6 mb-4">
                 <h3 className="text-xl font-bold text-white mb-3">什麼是價值投注？</h3>
                 <p className="text-slate-300 mb-3">
-                  價值投注是指當您評估的獲勝機率 > 賠率隱含的機率時，這就是一個價值投注機會。
+                  價值投注是指當您評估的獲勝機率 &gt; 賠率隱含的機率時，這就是一個價值投注機會。
                 </p>
                 <div className="bg-slate-700 rounded-lg p-4 mb-3">
                   <p className="text-slate-300 mb-2"><strong className="text-white">判斷公式：</strong></p>
@@ -84,7 +84,7 @@ export const SportsOddsAnalysisPage = () => {
                     價值 = (評估機率 × 賠率) - 1
                   </p>
                   <p className="text-slate-300 text-sm">
-                    如果價值 > 0，就是價值投注
+                    如果價值 &gt; 0，就是價值投注
                   </p>
                 </div>
                 <div className="bg-slate-700 rounded-lg p-4">

@@ -66,7 +66,7 @@ export const SlotsRTPGuidePage = () => {
               <h2 className="text-2xl font-bold text-white mb-4">三、RTP 等級分類</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
-                  <h3 className="text-lg font-bold text-red-400 mb-2">低 RTP（< 95%）</h3>
+                  <h3 className="text-lg font-bold text-red-400 mb-2">低 RTP（&lt; 95%）</h3>
                   <p className="text-slate-300 text-sm">不建議長期遊玩，回報率較低</p>
                 </div>
                 <div className="bg-amber-900/20 border border-amber-500/30 rounded-lg p-4">
@@ -74,7 +74,7 @@ export const SlotsRTPGuidePage = () => {
                   <p className="text-slate-300 text-sm">可接受範圍，適合一般玩家</p>
                 </div>
                 <div className="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4">
-                  <h3 className="text-lg font-bold text-emerald-400 mb-2">高 RTP（> 97%）</h3>
+                  <h3 className="text-lg font-bold text-emerald-400 mb-2">高 RTP（&gt; 97%）</h3>
                   <p className="text-slate-300 text-sm">推薦選擇，長期回報較高</p>
                 </div>
               </div>
