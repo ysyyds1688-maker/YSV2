@@ -48,15 +48,20 @@ export const HomePage = () => {
       
       {/* Hero Section with Banner */}
       <div className="relative h-[500px] sm:h-[600px] overflow-hidden group">
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-          style={{ 
-            backgroundImage: 'url("/images/home-banner.png")',
-            backgroundPosition: 'center',
-          }}
+        {/* Video Background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/30 to-slate-950"></div>
-        </div>
+          <source src="/videos/YS89.com.mp4" type="video/mp4" />
+          您的瀏覽器不支援影片播放。
+        </video>
+        
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center z-10 pt-20">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-bold mb-6 animate-fade-in-up">
