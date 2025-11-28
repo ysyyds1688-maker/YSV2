@@ -87,7 +87,8 @@ export default function App() {
               <Route path="/games/sports" element={<SportsPage />} />
               <Route path="/games/poker" element={<PokerPage />} />
               <Route path="/games/lottery" element={<LotteryPage />} />
-              <Route path="/games/fishing" element={<SlotsPage />} /> {/* 捕魚機暫時使用相同頁面 */}
+              <Route path="/games/electronic" element={<SlotsPage />} /> {/* 電子遊戲 */}
+              <Route path="/games/fishing" element={<SlotsPage />} /> {/* 捕魚機 */}
               <Route path="/games/esports" element={<SportsPage />} /> {/* 電競暫時使用相同頁面 */}
 
               {/* 新手教學 */}
