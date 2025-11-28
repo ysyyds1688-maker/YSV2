@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { SEO } from '../../components/SEO';
 import { Breadcrumb } from '../../components/Breadcrumb';
-import { FORUM_TOPICS, FORUM_CATEGORIES } from '../../data/mockForumData';
+import { FORUM_CATEGORIES, FORUM_TOPICS } from '@/data/mockForumData';
 import { Clock, Eye, MessageCircle, User, Calendar, Tag, Share2, ThumbsUp } from 'lucide-react';
 
 export const TopicPage = () => {
