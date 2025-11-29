@@ -27,12 +27,12 @@ export const BaccaratPage = () => {
       
       <div className="min-h-screen bg-slate-950">
         {/* Hero Section with Cover Image */}
-        <div className="relative pt-20 pb-16 overflow-hidden">
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9', paddingTop: '80px' }}>
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/真人banner2.png)',
-              backgroundPosition: 'center 70%',
+              backgroundPosition: 'center',
               backgroundSize: 'cover',
             }}
           >
