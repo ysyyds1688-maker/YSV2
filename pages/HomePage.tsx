@@ -39,20 +39,25 @@ const articles = [
 
 // 優化的圖片組件，支援預載入和懶載入
 const OptimizedImage = ({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) => {
-  const [loaded, setLoaded] = useState(priority); // priority 圖片預設為已載入狀態，避免閃爍
+  const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 預載入關鍵圖片
+    // 預載入關鍵圖片 - 立即開始載入
     if (priority) {
       const img = new Image();
       img.src = src;
-      img.onload = () => setLoaded(true);
-      img.onerror = () => {
-        setError(true);
-        setLoaded(false);
-      };
+      // 如果圖片已經在緩存中，立即設置為已載入
+      if (img.complete) {
+        setLoaded(true);
+      } else {
+        img.onload = () => setLoaded(true);
+        img.onerror = () => {
+          setError(true);
+          setLoaded(false);
+        };
+      }
       return;
     }
     
@@ -99,10 +104,12 @@ const OptimizedImage = ({ src, alt, className, priority = false }: { src: string
         </div>
       )}
       {/* 實際圖片 - 始終渲染，但根據 loaded 狀態控制顯示 */}
-      <div 
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ backgroundImage: `url("${src}")` }}
-      />
+      {loaded && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+          style={{ backgroundImage: `url("${src}")` }}
+        />
+      )}
       {/* 錯誤狀態 */}
       {error && (
         <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 z-10" />
