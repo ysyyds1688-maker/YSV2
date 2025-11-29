@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Smartphone, Trophy } from 'lucide-react';
 
 const games = [
-  { name: 'TOP 體育', category: '賽事直播', image: '/images/games/sports-hero.jpg', link: '/games/sports' },
-  { name: 'DG 真人', category: '視訊百家', image: '/images/baccarat/baccarat-cover.png', link: '/games/baccarat' },
-  { name: '88SOFT 電子', category: '熱門老虎機', image: '/images/games/slots-hero.jpg', link: '/games/electronic' },
-  { name: '高登棋牌', category: '對戰棋牌', image: '/images/games/poker-hero.jpg', link: '/games/poker' },
+  { name: 'TOP 體育', category: '賽事直播', image: '/images/體育.png', link: '/games/sports' },
+  { name: 'DG 真人', category: '視訊百家', image: '/images/真人 平台熱門.png', link: '/games/baccarat' },
+  { name: '88SOFT 電子', category: '熱門老虎機', image: '/images/電子 平台熱門.png', link: '/games/electronic' },
+  { name: '高登棋牌', category: '對戰棋牌', image: '/images/高登橋牌 平台熱門.png', link: '/games/poker' },
 ];
 
 const articles = [
