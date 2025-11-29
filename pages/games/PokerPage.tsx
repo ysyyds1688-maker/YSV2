@@ -19,7 +19,7 @@ export const PokerPage = () => {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/棋牌banner1.png)',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center 70%',
               backgroundSize: 'cover',
             }}
           >

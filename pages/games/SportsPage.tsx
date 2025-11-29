@@ -18,8 +18,8 @@ export const SportsPage = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url(/images/體育banner2.png)',
-              backgroundPosition: 'center',
+              backgroundImage: 'url(/images/體育 banner2.png)',
+              backgroundPosition: 'center 70%',
               backgroundSize: 'cover',
             }}
           >
