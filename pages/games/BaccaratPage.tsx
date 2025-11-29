@@ -32,11 +32,11 @@ export const BaccaratPage = () => {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/真人banner2.png)',
-              backgroundPosition: 'center 30%',
+              backgroundPosition: 'center 70%',
               backgroundSize: 'cover',
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/30 to-slate-950/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80"></div>
           </div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
             <h1 className="text-4xl md:text-5xl font-black text-white mb-4">

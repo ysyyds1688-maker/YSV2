@@ -20,7 +20,7 @@ export const SlotsPage = () => {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/電子banner1.png)',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center 70%',
               backgroundSize: 'cover',
             }}
           >
