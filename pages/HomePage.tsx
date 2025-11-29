@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Smartphone, Trophy } from 'lucide-react';
@@ -37,7 +37,93 @@ const articles = [
   }
 ];
 
+// 優化的圖片組件，支援預載入和懶載入
+const OptimizedImage = ({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // 預載入關鍵圖片
+    if (priority) {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => setLoaded(true);
+      img.onerror = () => setError(true);
+    } else {
+      // 懶載入：使用 Intersection Observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = new Image();
+              img.src = src;
+              img.onload = () => {
+                setLoaded(true);
+                observer.disconnect();
+              };
+              img.onerror = () => {
+                setError(true);
+                observer.disconnect();
+              };
+            }
+          });
+        },
+        { rootMargin: '50px' } // 提前 50px 開始載入
+      );
+
+      if (containerRef.current) {
+        observer.observe(containerRef.current);
+      }
+
+      return () => {
+        if (containerRef.current) {
+          observer.disconnect();
+        }
+      };
+    }
+  }, [src, priority]);
+
+  return (
+    <div ref={containerRef} className={`relative ${className || ''}`}>
+      {/* 載入中的骨架屏 */}
+      {!loaded && !error && (
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 animate-pulse">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-700/20 to-transparent animate-shimmer"></div>
+        </div>
+      )}
+      {/* 實際圖片 */}
+      {loaded && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+          style={{ backgroundImage: `url("${src}")` }}
+        />
+      )}
+      {/* 錯誤狀態 */}
+      {error && (
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
+      )}
+    </div>
+  );
+};
+
 export const HomePage = () => {
+  // 預載入關鍵圖片
+  useEffect(() => {
+    const preloadImages = games.slice(0, 2).map(game => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = game.image;
+      document.head.appendChild(link);
+      return link;
+    });
+
+    return () => {
+      preloadImages.forEach(link => document.head.removeChild(link));
+    };
+  }, []);
+
   return (
     <>
       <SEO 
@@ -124,12 +210,15 @@ export const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {games.map((game, index) => (
               <Link key={index} to={game.link} className="group relative h-80 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url("${game.image}")` }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-75 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                {/* 使用優化的圖片組件 */}
+                <OptimizedImage 
+                  src={game.image}
+                  alt={game.name}
+                  className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                  priority={index < 2} // 前兩張圖片優先載入
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-75 transition-opacity z-10"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform z-20">
                   <span className="text-cyan-400 text-xs font-bold tracking-wider uppercase mb-2 block">{game.category}</span>
                   <h3 className="text-2xl font-black text-white mb-2">{game.name}</h3>
                   <div className="w-12 h-1 bg-cyan-500 rounded-full group-hover:w-full transition-all duration-300"></div>
