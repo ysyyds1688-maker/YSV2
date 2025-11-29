@@ -20,11 +20,11 @@ export const Navbar = () => {
   const navItems = [
     { path: '/', label: '首頁' },
     { path: '/forum', label: '討論區' },
-    { path: '/games/sports', label: '體育' },
-    { path: '/games/baccarat', label: '真人' },
-    { path: '/games/electronic', label: '電子' },
-    { path: '/games/poker', label: '棋牌' },
-    { path: '/promotions', label: '優惠' },
+    { path: '/games/sports', label: '體育', banner: '/images/體育banner2.png' },
+    { path: '/games/baccarat', label: '真人', banner: '/images/真人banner2.png' },
+    { path: '/games/electronic', label: '電子', banner: '/images/電子banner1.png' },
+    { path: '/games/poker', label: '棋牌', banner: '/images/棋牌banner1.png' },
+    { path: '/promotions', label: '優惠', banner: '/images/優惠banner1.png' },
   ];
 
   const isActive = (path: string) => {
@@ -48,13 +48,27 @@ export const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-3 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                  className={`px-3 py-2 rounded-full text-sm font-bold transition-all duration-300 relative group ${
                     isActive(item.path)
                       ? 'text-cyan-950 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] scale-105'
                       : 'text-slate-400 hover:text-white hover:bg-slate-800'
                   }`}
                 >
-                  {item.label}
+                  {/* Banner背景圖片 */}
+                  {item.banner && (
+                    <>
+                      <div 
+                        className={`absolute inset-0 rounded-full bg-cover bg-center transition-opacity duration-300 ${
+                          isActive(item.path) ? 'opacity-30' : 'opacity-0 group-hover:opacity-40'
+                        }`}
+                        style={{ backgroundImage: `url("${item.banner}")` }}
+                      />
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-r transition-opacity duration-300 ${
+                        isActive(item.path) ? 'from-slate-950/70 via-slate-950/50 to-slate-950/70' : 'from-slate-950/80 via-slate-950/60 to-slate-950/80 opacity-0 group-hover:opacity-100'
+                      }`}></div>
+                    </>
+                  )}
+                  <span className="relative z-10">{item.label}</span>
                 </Link>
               ))}
             </div>
@@ -88,14 +102,28 @@ export const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                className={`block px-3 py-2 rounded-md text-base font-medium relative group ${
                   isActive(item.path)
                     ? 'text-cyan-400 bg-slate-900'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {item.label}
+                {/* Mobile Banner背景圖片 */}
+                {item.banner && (
+                  <>
+                    <div 
+                      className={`absolute inset-0 rounded-md bg-cover bg-center transition-opacity duration-300 ${
+                        isActive(item.path) ? 'opacity-30' : 'opacity-0 group-hover:opacity-40'
+                      }`}
+                      style={{ backgroundImage: `url("${item.banner}")` }}
+                    />
+                    <div className={`absolute inset-0 rounded-md bg-gradient-to-r transition-opacity duration-300 ${
+                      isActive(item.path) ? 'from-slate-950/70 via-slate-950/50 to-slate-950/70' : 'from-slate-950/80 via-slate-950/60 to-slate-950/80 opacity-0 group-hover:opacity-100'
+                    }`}></div>
+                  </>
+                )}
+                <span className="relative z-10">{item.label}</span>
               </Link>
             ))}
             <Link
