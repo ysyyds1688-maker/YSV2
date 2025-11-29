@@ -20,7 +20,7 @@ export const Navbar = () => {
   const navItems = [
     { path: '/', label: '首頁' },
     { path: '/forum', label: '討論區' },
-    { path: '/games/sports', label: '體育', banner: '/images/體育banner2.png' },
+    { path: '/games/sports', label: '體育', banner: '/images/體育 banner2.png' },
     { path: '/games/baccarat', label: '真人', banner: '/images/真人banner2.png' },
     { path: '/games/electronic', label: '電子', banner: '/images/電子banner1.png' },
     { path: '/games/poker', label: '棋牌', banner: '/images/棋牌banner1.png' },
