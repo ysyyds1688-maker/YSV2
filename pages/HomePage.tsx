@@ -39,7 +39,7 @@ const articles = [
 
 // 優化的圖片組件，支援預載入和懶載入
 const OptimizedImage = ({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) => {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(priority); // priority 圖片預設為已載入狀態，避免閃爍
   const [error, setError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -49,40 +49,46 @@ const OptimizedImage = ({ src, alt, className, priority = false }: { src: string
       const img = new Image();
       img.src = src;
       img.onload = () => setLoaded(true);
-      img.onerror = () => setError(true);
-    } else {
-      // 懶載入：使用 Intersection Observer
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const img = new Image();
-              img.src = src;
-              img.onload = () => {
-                setLoaded(true);
-                observer.disconnect();
-              };
-              img.onerror = () => {
-                setError(true);
-                observer.disconnect();
-              };
-            }
-          });
-        },
-        { rootMargin: '50px' } // 提前 50px 開始載入
-      );
-
-      if (containerRef.current) {
-        observer.observe(containerRef.current);
-      }
-
-      return () => {
-        if (containerRef.current) {
-          observer.disconnect();
-        }
+      img.onerror = () => {
+        setError(true);
+        setLoaded(false);
       };
+      return;
     }
-  }, [src, priority]);
+    
+    // 懶載入：使用 Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !loaded) {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+              setLoaded(true);
+              observer.disconnect();
+            };
+            img.onerror = () => {
+              setError(true);
+              setLoaded(false);
+              observer.disconnect();
+            };
+          }
+        });
+      },
+      { rootMargin: '50px' } // 提前 50px 開始載入
+    );
+
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.disconnect();
+      }
+    };
+  }, [src, priority, loaded]);
 
   return (
     <div ref={containerRef} className={`relative ${className || ''}`}>
@@ -92,16 +98,14 @@ const OptimizedImage = ({ src, alt, className, priority = false }: { src: string
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-700/20 to-transparent animate-shimmer"></div>
         </div>
       )}
-      {/* 實際圖片 */}
-      {loaded && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
-          style={{ backgroundImage: `url("${src}")` }}
-        />
-      )}
+      {/* 實際圖片 - 始終渲染，但根據 loaded 狀態控制顯示 */}
+      <div 
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ backgroundImage: `url("${src}")` }}
+      />
       {/* 錯誤狀態 */}
       {error && (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 z-10" />
       )}
     </div>
   );

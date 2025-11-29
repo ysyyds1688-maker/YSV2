@@ -19,7 +19,7 @@ export const PromotionsPage = () => {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/優惠banner1.png)',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center 70%',
               backgroundSize: 'cover',
             }}
           >
