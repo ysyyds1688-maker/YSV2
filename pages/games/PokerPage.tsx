@@ -18,7 +18,7 @@ export const PokerPage = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url(/images/games/poker-hero.jpg)',
+              backgroundImage: 'url(/images/棋牌banner1.png)',
               backgroundPosition: 'center',
               backgroundSize: 'cover',
             }}

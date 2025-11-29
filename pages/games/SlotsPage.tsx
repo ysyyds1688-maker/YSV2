@@ -19,7 +19,7 @@ export const SlotsPage = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url(/images/games/slots-hero.jpg)',
+              backgroundImage: 'url(/images/電子banner1.png)',
               backgroundPosition: 'center',
               backgroundSize: 'cover',
             }}
