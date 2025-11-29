@@ -12,10 +12,29 @@ export const PromotionsPage = () => {
         keywords="優惠活動,體驗金,體驗金168,首存優惠,返水優惠,YS娛樂城優惠"
         canonical="/promotions"
       />
-      <div className="min-h-screen bg-slate-950 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-slate-950">
+        {/* Hero Section with Cover Image */}
+        <div className="relative pt-20 pb-16 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: 'url(/images/優惠banner1.png)',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80"></div>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 className="text-4xl md:text-5xl font-black text-white mb-4">優惠活動</h1>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+              體驗金168、首存優惠、返水優惠等豐富活動
+            </p>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Breadcrumb items={[{ name: '優惠活動', url: '/promotions' }]} />
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-6">優惠活動</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             <div 
               className="relative bg-gradient-to-br from-cyan-900/30 to-fuchsia-900/30 border border-cyan-500/30 rounded-2xl p-8 overflow-hidden group"
