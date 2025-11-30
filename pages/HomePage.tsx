@@ -221,13 +221,11 @@ export const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {games.map((game, index) => (
               <Link key={index} to={game.link} className="group relative h-80 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
-                {/* 使用優化的圖片組件 */}
-                <OptimizedImage 
-                  src={game.image}
-                  alt={game.name}
-                  className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
-                  priority={index < 2} // 前兩張圖片優先載入
-                />
+                {/* 背景圖片 */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ backgroundImage: `url("${game.image}")` }}
+                ></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-75 transition-opacity z-10"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform z-20">
                   <span className="text-cyan-400 text-xs font-bold tracking-wider uppercase mb-2 block">{game.category}</span>
