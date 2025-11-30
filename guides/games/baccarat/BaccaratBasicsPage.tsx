@@ -77,7 +77,7 @@ export const BaccaratBasicsPage = () => {
               <div 
                 className="w-full h-64 rounded-xl mb-8 bg-cover bg-center"
                 style={{
-                  backgroundImage: 'url(/images/guides/baccarat-basics.jpg)',
+                  backgroundImage: 'url(/images/guides/baccarat-basics.png)',
                 }}
               >
                 <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent rounded-xl"></div>
