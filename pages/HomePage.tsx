@@ -16,7 +16,7 @@ const articles = [
     title: '2025 十大娛樂城評測：哪家出金最快？',
     category: '娛樂城評價',
     date: '2025-11-28',
-    image: '/images/recommendations/casino-1.jpg',
+    image: '/images/首頁文章1.png',
     link: '/topic/2025-top-10-casinos-review'
   },
   {
@@ -24,7 +24,7 @@ const articles = [
     title: 'DG 真人百家樂：多檯監控抓龍技巧',
     category: '真人攻略',
     date: '2025-11-26',
-    image: '/images/guides/baccarat-road-reading.jpg',
+    image: '/images/首頁文章2.png',
     link: '/topic/dg-baccarat-road-reading'
   },
   {
@@ -32,7 +32,7 @@ const articles = [
     title: '體驗金懶人包：這 3 家送最大方且免儲值',
     category: '優惠情報',
     date: '2025-11-25',
-    image: '/images/promotions/welcome-bonus.jpg',
+    image: '/images/首頁文章3.png',
     link: '/topic/welcome-bonus-comparison-2025'
   }
 ];
