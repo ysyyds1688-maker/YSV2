@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 export const NewsPage = () => {
   const articles = [
-    { id: 1, title: '百家樂技巧全攻略', date: '2024-03-20', category: '遊戲技巧', image: '/images/articles/baccarat-tips.jpg' },
-    { id: 2, title: '老虎機推薦 2025', date: '2024-03-18', category: '遊戲推薦', image: '/images/articles/slots-recommendation.jpg' },
-    { id: 3, title: '體育下注分析', date: '2024-03-15', category: '賽事分析', image: '/images/articles/sports-analysis.jpg' },
-    { id: 4, title: '娛樂城推薦 2025', date: '2024-03-12', category: '平台推薦', image: '/images/articles/casino-recommendation.jpg' },
+    { id: 1, title: '百家樂技巧全攻略', date: '2024-03-20', category: '遊戲技巧', image: '/images/articles/baccarat-tips.png' },
+    { id: 2, title: '老虎機推薦 2025', date: '2024-03-18', category: '遊戲推薦', image: '/images/articles/slots-recommendation.png' },
+    { id: 3, title: '體育下注分析', date: '2024-03-15', category: '賽事分析', image: '/images/articles/sports-analysis.png' },
+    { id: 4, title: '娛樂城推薦 2025', date: '2024-03-12', category: '平台推薦', image: '/images/articles/casino-recommendation.png' },
   ];
 
   return (

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Smartphone, Trophy } from 'lucide-react';
 
 const games = [
-  { name: 'TOP 體育', category: '賽事直播', image: '/images/體育.png', link: '/games/sports' },
-  { name: 'DG 真人', category: '視訊百家', image: '/images/真人 平台熱門.png', link: '/games/baccarat' },
-  { name: '88SOFT 電子', category: '熱門老虎機', image: '/images/電子 平台熱門.png', link: '/games/electronic' },
-  { name: '高登棋牌', category: '對戰棋牌', image: '/images/高登橋牌 平台熱門.png', link: '/games/poker' },
+  { name: 'TOP 體育', category: '賽事直播', image: '/images/已使用/體育.png', link: '/games/sports' },
+  { name: 'DG 真人', category: '視訊百家', image: '/images/已使用/真人 平台熱門.png', link: '/games/baccarat' },
+  { name: '88SOFT 電子', category: '熱門老虎機', image: '/images/已使用/電子 平台熱門.png', link: '/games/electronic' },
+  { name: '高登棋牌', category: '對戰棋牌', image: '/images/已使用/高登橋牌 平台熱門.png', link: '/games/poker' },
 ];
 
 const articles = [
@@ -16,7 +16,7 @@ const articles = [
     title: '2025 十大娛樂城評測：哪家出金最快？',
     category: '娛樂城評價',
     date: '2025-11-28',
-    image: '/images/首頁文章1.png',
+    image: '/images/已使用/首頁文章1.png',
     link: '/topic/2025-top-10-casinos-review'
   },
   {
@@ -24,7 +24,7 @@ const articles = [
     title: 'DG 真人百家樂：多檯監控抓龍技巧',
     category: '真人攻略',
     date: '2025-11-26',
-    image: '/images/首頁文章2.png',
+    image: '/images/已使用/首頁文章2.png',
     link: '/topic/dg-baccarat-road-reading'
   },
   {
@@ -32,7 +32,7 @@ const articles = [
     title: '體驗金懶人包：這 3 家送最大方且免儲值',
     category: '優惠情報',
     date: '2025-11-25',
-    image: '/images/首頁文章3.png',
+    image: '/images/已使用/首頁文章3.png',
     link: '/topic/welcome-bonus-comparison-2025'
   }
 ];
