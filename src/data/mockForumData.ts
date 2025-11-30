@@ -59,7 +59,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 45,
     tags: ['娛樂城推薦', '出金實測', '2025排名'],
     summary: '經過團隊實測，整理出 2025 年最值得遊玩的十大娛樂城。我們針對出金速度、遊戲種類、客服品質進行了全方位的評比...',
-    image: '/images/recommendations/casino-1.jpg',
+    image: '/images/已使用/首頁文章1.png',
     content: `
       <h2>為什麼選擇正確的娛樂城很重要？</h2>
       <p>在網路上搜尋娛樂城，成千上萬的結果讓人眼花撩亂。選錯平台不僅可能遇到不出金的詐騙，還可能因為遊戲公平性問題而輸得不明不白。本篇評測旨在幫助玩家避開黑網，找到真正安全、好玩的平台。</p>
@@ -89,7 +89,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 32,
     tags: ['真人視訊', 'DG百家樂', '長龍技巧'],
     summary: 'DG 真人是目前市佔率極高的視訊平台。本文將教你如何利用多檯監控功能，快速鎖定好路長龍，並推薦適合的平台...',
-    image: '/images/guides/baccarat-road-reading.jpg',
+    image: '/images/已使用/首頁文章2.png',
     content: `
       <h2>為什麼選擇 DG 真人？</h2>
       <p>DG (Dream Gaming) 以其高清流暢的視訊和美麗的荷官著稱。連線穩定度極高，幾乎不會出現卡頓情況，這對於抓路玩家來說至關重要。</p>
@@ -116,7 +116,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 88,
     tags: ['體驗金', '免儲值', '首存紅利'],
     summary: '新手玩家必看！我們整理了全台 20 家娛樂城的註冊優惠，幫你篩選出流水最低、最容易提領的 3 家平台...',
-    image: '/images/promotions/welcome-bonus.jpg',
+    image: '/images/已使用/首頁文章3.png',
     content: `
       <h2>如何挑選體驗金活動？</h2>
       <p>很多平台打著送 1000 的旗號，卻要求 20 倍流水，甚至鎖住不讓提款。挑選時要注意：</p>
@@ -144,7 +144,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 12,
     tags: ['電子遊戲', '88SOFT', '爆分技巧'],
     summary: '88SOFT 是近期非常熱門的電子系統。本文分享如何觀察機台週期，以及我在《財神來了》贏得 5000 倍大獎的實戰過程...',
-    image: '/images/articles/slots-rtp-guide.jpg',
+    image: '/images/articles/slots-rtp-guide.png',
     content: `
       <h2>遊戲介紹：財神來了</h2>
       <p>這款由 88SOFT 開發的《財神來了》，以其中獎率高、畫面喜氣著稱。遊戲採用 243 路賠付機制，只要連續出現相同符號即可中獎。</p>
@@ -164,7 +164,7 @@ export const FORUM_TOPICS: ForumTopic[] = [
     replies: 45,
     tags: ['體育投注', 'TOP體育', '賠率分析'],
     summary: '許多玩家都在問，到底該玩 TOP 體育還是熊貓體育？我們團隊針對 NBA 和英超賽事進行了為期一週的賠率追蹤實測...',
-    image: '/images/articles/sports-analysis.jpg',
+    image: '/images/articles/sports-analysis.png',
     content: `
       <h2>為什麼選擇合適的體育平台很重要？</h2>
       <p>不同的體育平台在盤口開出時間、賠率水位以及滾球流暢度上都有差異。</p>
