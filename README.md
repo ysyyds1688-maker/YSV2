@@ -17,8 +17,9 @@
 *   📄 **`ys-seo-structure.md`**: 原始 SEO 架構規劃書。
 
 ### 2. 圖片與資源
+*   📄 **`圖片資源清單.md`**: 完整的圖片使用清單與狀態追蹤（✅ 41 張已完成，❌ 3 張待補充）。
 *   📄 **`IMAGE_REQUIREMENTS.md`**: 全站圖片尺寸規範與 AI 生成提示詞。
-*   📂 **`public/images/`**: 存放已生成的圖片素材 (包含首頁 Banner、OG Image 等)。
+*   📂 **`public/images/`**: 存放已生成的圖片素材，已建立完整資料夾結構（articles, promotions, guides, recommendations, influencers）。
 
 ### 3. 程式碼結構
 *   `pages/`: 所有頁面組件
@@ -77,116 +78,69 @@ npm run dev
 
 ---
 
-## 🖼️ 圖片資源清單與狀態
+## 🖼️ 圖片資源狀態
 
-### ✅ 已完成的圖片
+### ✅ 已完成圖片：41 張
 
-#### 1. 導航欄 Banner (Hover 時顯示)
-- ✅ `/images/體育 banner2.png` - 體育導航欄 banner
-- ✅ `/images/真人banner2.png` - 真人導航欄 banner
-- ✅ `/images/電子banner1.png` - 電子導航欄 banner
-- ✅ `/images/棋牌banner1.png` - 棋牌導航欄 banner
-- ✅ `/images/優惠banner1.png` - 優惠導航欄 banner
+- **主要遊戲圖片**：27 張（導航欄 Banner、遊戲頁面 Banner、首頁遊戲卡片、遊戲專區卡片、首頁文章）
+- **文章/新聞圖片**：6 張（已整理至 `articles/` 資料夾）
+- **優惠活動圖片**：2 張（已整理至 `promotions/` 資料夾）
+- **攻略教學圖片**：2 張（已整理至 `guides/` 資料夾）
+- **推薦評測圖片**：4 張（已整理至 `recommendations/` 資料夾）
 
-#### 2. 遊戲頁面 Hero Banner (16:9 比例)
-- ✅ `/images/真人banner2.png` - 真人百家樂頁面
-- ✅ `/images/電子banner1.png` - 電子遊戲頁面
-- ✅ `/images/棋牌banner1.png` - 棋牌遊戲頁面
-- ✅ `/images/優惠banner1.png` - 優惠活動頁面
-- ✅ `/images/體育 banner2.png` - 體育投注頁面
+### ❌ 待補充圖片：3 張
 
-#### 3. 首頁熱門遊戲區塊
-- ✅ `/images/體育.png` - 體育遊戲卡片
-- ✅ `/images/真人 平台熱門.png` - 真人遊戲卡片
-- ✅ `/images/電子 平台熱門.png` - 電子遊戲卡片
-- ✅ `/images/高登橋牌 平台熱門.png` - 棋牌遊戲卡片
+- **網紅頭像**：`influencer-1.jpg`, `influencer-2.jpg`, `influencer-3.jpg`（需放置於 `influencers/` 資料夾）
 
-#### 4. 遊戲專區頁面卡片
-- ✅ `/images/真人遊戲專區.png` - 真人百家樂卡片
-- ✅ `/images/電子遊戲專區.png` - 電子遊戲卡片
-- ✅ `/images/體育遊戲專區.png` - 體育投注卡片
-- ✅ `/images/高登橋牌遊戲專區.png` - 棋牌遊戲卡片
-- ✅ `/images/捕魚機遊戲專區.png` - 捕魚機卡片
-- ✅ `/images/彩票遊戲專區.png` - 彩票卡片
-- ✅ `/images/電競遊戲專區2.png` - 電競卡片
+### 📂 圖片資料夾結構
 
-### ❌ 缺失的圖片 (需要補充)
-
-#### 1. 首頁相關
-- ❌ `/images/home-banner.png` - 首頁 Hero 區塊背景圖 (可選，目前有影片背景)
-- ❌ `/images/recommendations/casino-1.jpg` - 首頁推薦文章圖片
-- ❌ `/images/guides/baccarat-road-reading.jpg` - 首頁攻略文章圖片
-- ❌ `/images/promotions/welcome-bonus.jpg` - 首頁優惠文章圖片
-
-#### 2. 文章/新聞相關
-- ❌ `/images/articles/baccarat-tips.jpg` - 百家樂技巧文章
-- ❌ `/images/articles/slots-recommendation.jpg` - 老虎機推薦文章
-- ❌ `/images/articles/sports-analysis.jpg` - 體育分析文章
-- ❌ `/images/articles/casino-recommendation.jpg` - 娛樂城推薦文章
-- ❌ `/images/articles/slots-rtp-guide.jpg` - 老虎機 RTP 指南文章
-- ❌ `/images/articles/sports-bankroll.jpg` - 體育資金管理文章
-
-#### 3. 優惠活動相關
-- ❌ `/images/promotions/first-deposit.jpg` - 首存優惠圖片
-
-#### 4. 攻略教學相關
-- ❌ `/images/guides/baccarat-basics.jpg` - 百家樂基礎教學
-- ❌ `/images/guides/baccarat-road-reading.jpg` - 百家樂看路法教學
-
-#### 5. 推薦/評測相關
-- ❌ `/images/recommendations/casino-1.jpg` - 娛樂城推薦圖片 (多張，casino-1.jpg, casino-2.jpg 等)
-
-#### 6. 網紅/影響者相關
-- ❌ `/images/influencers/influencer-1.jpg` - 網紅頭像 (多張，influencer-1.jpg, influencer-2.jpg, influencer-3.jpg)
-
-#### 7. 其他遊戲頁面 (舊路徑，已改用 banner)
-- ❌ `/images/games/slots.png` - 電子遊戲 (已改用 `/images/電子 平台熱門.png`)
-- ❌ `/images/games/baccarat.png` - 真人百家樂 (已改用 `/images/真人 平台熱門.png`)
-- ❌ `/images/games/sports.png` - 體育投注 (已改用 `/images/體育.png`)
-- ❌ `/images/games/poker.png` - 棋牌遊戲 (已改用 `/images/高登橋牌 平台熱門.png`)
-- ❌ `/images/games/lottery.png` - 彩票遊戲
-- ❌ `/images/games/slots-hero.jpg` - 電子遊戲頁面 (已改用 banner)
-- ❌ `/images/games/poker-hero.jpg` - 棋牌遊戲頁面 (已改用 banner)
-- ❌ `/images/games/sports-hero.jpg` - 體育投注頁面 (已改用 banner)
-- ❌ `/images/games/lottery-hero.jpg` - 彩票頁面
-- ❌ `/images/baccarat/baccarat-cover.png` - 真人百家樂封面 (已改用 banner)
-
-### 📋 圖片放置說明
-
-#### 圖片資料夾結構建議：
 ```
 public/images/
-├── articles/          # 文章圖片
-│   ├── baccarat-tips.jpg
-│   ├── slots-recommendation.jpg
-│   ├── sports-analysis.jpg
-│   ├── casino-recommendation.jpg
-│   ├── slots-rtp-guide.jpg
-│   └── sports-bankroll.jpg
-├── guides/            # 攻略教學圖片
-│   ├── baccarat-basics.jpg
-│   └── baccarat-road-reading.jpg
-├── promotions/        # 優惠活動圖片
-│   ├── welcome-bonus.jpg
-│   └── first-deposit.jpg
-├── recommendations/   # 推薦評測圖片
-│   ├── casino-1.jpg
-│   ├── casino-2.jpg
-│   └── casino-3.jpg (依需求增加)
-├── influencers/      # 網紅頭像
-│   ├── influencer-1.jpg
-│   ├── influencer-2.jpg
-│   └── influencer-3.jpg
-└── games/            # 遊戲相關圖片 (部分已改用根目錄)
-    └── lottery.png (如需要)
+├── 已使用/              # 主要遊戲圖片（19張）
+├── articles/            # 文章圖片（6張）✅
+├── promotions/          # 優惠活動圖片（2張）✅
+├── guides/              # 攻略教學圖片（2張）✅
+├── recommendations/     # 推薦評測圖片（4張）✅
+└── influencers/         # 網紅頭像（待補充3張）❌
 ```
 
-#### 圖片規格建議：
-- **Banner 圖片**: 16:9 比例，建議尺寸 1920x1080px 或更高
-- **卡片圖片**: 建議 4:3 或 16:9 比例，尺寸 800x600px 或更高
-- **文章封面**: 建議 16:9 比例，尺寸 1200x675px 或更高
-- **網紅頭像**: 建議 1:1 比例，尺寸 400x400px 或更高
-- **格式**: 建議使用 JPG (照片) 或 PNG (需要透明背景時)
+> 📄 **詳細清單**：請參考 `圖片資源清單.md` 查看完整的圖片使用狀況與規格說明。
+
+---
+
+## 📊 專案進度總覽
+
+### ✅ 已完成項目
+
+#### 1. 圖片資源整理（95% 完成）
+- ✅ 建立完整的圖片資料夾結構（articles, promotions, guides, recommendations, influencers）
+- ✅ 整理並移動所有已使用的圖片至 `已使用/` 資料夾
+- ✅ 完成 41 張圖片的路徑更新與分類
+- ✅ 建立 `圖片資源清單.md` 完整追蹤文件
+- ⚠️ 待補充：3 張網紅頭像
+
+#### 2. YS 頁面文章完善（100% 完成）
+- ✅ **關於我們頁面** (`/trust/about`)：完整內容 + Organization schema
+- ✅ **客服頁面** (`/trust/contact`)：完整內容 + ContactPage schema
+- ✅ **出金保障頁面** (`/trust/security`)：完整內容 + FAQ schema
+- ✅ 所有頁面包含完整的 SEO 優化（meta 標籤、結構化數據、內部連結）
+- ✅ 建立 `YS頁面文章檢查清單.md` 追蹤文件
+
+#### 3. SEO 優化
+- ✅ 所有頁面包含完整的 meta 標籤
+- ✅ 結構化數據（Schema.org）已實施
+- ✅ 清晰的 H1/H2/H3 標題結構
+- ✅ 內部連結優化
+
+### ⚠️ 待完成項目
+
+#### 1. 圖片補充
+- ❌ 網紅頭像 3 張（`influencers/influencer-1.jpg`, `influencer-2.jpg`, `influencer-3.jpg`）
+
+#### 2. 內容完善（可選）
+- ⚠️ 其他頁面內容檢查與優化
+- ⚠️ 更多內部連結建立
+- ⚠️ 圖片 alt 標籤檢查
 
 ---
 
@@ -195,16 +149,22 @@ public/images/
 1.  請先確認 React 站的 `/forum` 頁面，了解期望的論壇互動流程與視覺風格。
 2.  依照 `WP_DEVELOPMENT_SPEC.md` 建立 WordPress 的後台欄位。
 3.  使用 `src/data/mockForumData.ts` 中的內容作為初期填充資料。
-4.  圖片素材請直接從 `public/images` 移植使用。
-5.  **補充缺失的圖片**：請參考上方「缺失的圖片」清單，補充必要的圖片資源。
+4.  圖片素材請直接從 `public/images` 移植使用，已建立完整資料夾結構。
+5.  **補充缺失的圖片**：僅需補充 3 張網紅頭像，詳細請參考 `圖片資源清單.md`。
 
 ---
 
 ## 📝 更新日誌
 
 ### 2025-01-XX (最新更新)
+- ✅ **圖片資源整理完成**：41 張圖片已完成分類與路徑更新，建立完整資料夾結構
+- ✅ **YS 頁面文章完善**：關於我們、客服、出金保障三個頁面已完成內容與 SEO 優化
+- ✅ **SEO 優化完成**：所有頁面包含結構化數據、meta 標籤、內部連結
+- ✅ **文件建立**：`圖片資源清單.md`、`YS頁面文章檢查清單.md`
+- ⚠️ **待補充**：3 張網紅頭像
+
+### 2025-01-XX (前期更新)
 - ✅ 完成所有遊戲頁面 Banner (16:9 比例)
 - ✅ 完成導航欄 Banner 圖片
 - ✅ 完成首頁熱門遊戲區塊圖片
 - ✅ 完成遊戲專區頁面所有卡片圖片
-- ⚠️ 待補充：文章、優惠、推薦等相關圖片
