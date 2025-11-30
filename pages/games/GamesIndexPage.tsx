@@ -5,13 +5,13 @@ import { ArrowRight } from 'lucide-react';
 
 export const GamesIndexPage = () => {
   const games = [
-    { name: '真人百家樂', url: '/games/baccarat', desc: '專業荷官發牌，享受最真實的賭場體驗', icon: '🃏' },
-    { name: '電子遊戲', url: '/games/slots', desc: '高RTP老虎機，累積獎池最高數百萬', icon: '🎰' },
-    { name: '體育投注', url: '/games/sports', desc: 'NBA、足球、棒球等多種賽事', icon: '⚽' },
-    { name: '棋牌遊戲', url: '/games/poker', desc: '德州撲克、21點、鬥地主', icon: '🀄' },
-    { name: '捕魚機', url: '/games/fishing', desc: '刺激的捕魚遊戲，獎金豐厚', icon: '🎣' },
-    { name: '彩票', url: '/games/lottery', desc: '時時彩、快三、六合彩', icon: '🎫' },
-    { name: '電競', url: '/games/esports', desc: '英雄聯盟、CS:GO等電競賽事', icon: '🎮' },
+    { name: '真人百家樂', url: '/games/baccarat', desc: '專業荷官發牌，享受最真實的賭場體驗', image: '/images/真人遊戲專區.png' },
+    { name: '電子遊戲', url: '/games/slots', desc: '高RTP老虎機，累積獎池最高數百萬', image: '/images/電子 平台熱門.png' },
+    { name: '體育投注', url: '/games/sports', desc: 'NBA、足球、棒球等多種賽事', image: '/images/體育遊戲專區.png' },
+    { name: '棋牌遊戲', url: '/games/poker', desc: '德州撲克、21點、鬥地主', image: '/images/高登橋牌 平台熱門.png' },
+    { name: '捕魚機', url: '/games/fishing', desc: '刺激的捕魚遊戲，獎金豐厚', image: '/images/捕魚機遊戲專區.png' },
+    { name: '彩票', url: '/games/lottery', desc: '時時彩、快三、六合彩', image: '/images/彩票遊戲專區.png' },
+    { name: '電競', url: '/games/esports', desc: '英雄聯盟、CS:GO等電競賽事', image: '/images/電競 遊戲專區.png' },
   ];
 
   return (
@@ -32,14 +32,24 @@ export const GamesIndexPage = () => {
               <Link
                 key={game.url}
                 to={game.url}
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 hover:bg-slate-800 transition-all group"
+                className="bg-slate-900 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 hover:bg-slate-800 transition-all group relative overflow-hidden"
               >
-                <div className="text-5xl mb-4">{game.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{game.name}</h3>
-                <p className="text-slate-400 mb-4">{game.desc}</p>
-                <span className="text-cyan-400 font-bold text-sm flex items-center group-hover:translate-x-1 transition-transform">
-                  查看詳情 <ArrowRight size={16} className="ml-2" />
-                </span>
+                {/* 背景圖片 */}
+                {game.image && (
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity"
+                    style={{ backgroundImage: `url("${game.image}")` }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/50 to-slate-900"></div>
+                  </div>
+                )}
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{game.name}</h3>
+                  <p className="text-slate-400 mb-4">{game.desc}</p>
+                  <span className="text-cyan-400 font-bold text-sm flex items-center group-hover:translate-x-1 transition-transform">
+                    查看詳情 <ArrowRight size={16} className="ml-2" />
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
