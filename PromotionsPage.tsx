@@ -23,7 +23,7 @@ export const PromotionsPage = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity"
                 style={{
-                  backgroundImage: 'url(/images/promotions/welcome-bonus.jpg)',
+                  backgroundImage: 'url(/images/promotions/welcome-bonus.png)',
                 }}
               ></div>
               <div className="relative z-10">
@@ -41,7 +41,7 @@ export const PromotionsPage = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity"
                 style={{
-                  backgroundImage: 'url(/images/promotions/first-deposit.jpg)',
+                  backgroundImage: 'url(/images/promotions/first-deposit.png)',
                 }}
               ></div>
               <div className="relative z-10">
