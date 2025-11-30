@@ -110,7 +110,7 @@ export const BestCasinos2025Page = () => {
                 <div 
                   className="w-full h-48 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url("/images/recommendations/casino-${index + 1}.jpg")`,
+                    backgroundImage: `url("/images/recommendations/casino-${index + 1}.png")`,
                   }}
                 >
                   <div className="w-full h-full bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent"></div>
