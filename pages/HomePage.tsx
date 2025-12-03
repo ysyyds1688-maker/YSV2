@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Smartphone, Trophy } from 'lucide-react';
+import { useArticles } from '../services/ArticleService'; // 引入文章服務
 
 const games = [
   { name: 'TOP 體育', category: '賽事直播', image: '/images/已使用/體育.png', link: '/games/sports' },
@@ -10,32 +11,8 @@ const games = [
   { name: '高登棋牌', category: '對戰棋牌', image: '/images/已使用/高登橋牌 平台熱門.png', link: '/games/poker' },
 ];
 
-const articles = [
-  {
-    id: '1',
-    title: '2025 十大娛樂城評測：哪家出金最快？',
-    category: '娛樂城評價',
-    date: '2025-11-28',
-    image: '/images/已使用/首頁文章1.png',
-    link: '/topic/2025-top-10-casinos-review'
-  },
-  {
-    id: '2',
-    title: 'DG 真人百家樂：多檯監控抓龍技巧',
-    category: '真人攻略',
-    date: '2025-11-26',
-    image: '/images/已使用/首頁文章2.png',
-    link: '/topic/dg-baccarat-road-reading'
-  },
-  {
-    id: '3',
-    title: '體驗金懶人包：這 3 家送最大方且免儲值',
-    category: '優惠情報',
-    date: '2025-11-25',
-    image: '/images/已使用/首頁文章3.png',
-    link: '/topic/welcome-bonus-comparison-2025'
-  }
-];
+// 移除寫死的 articles
+// const articles = [ ... ]; 
 
 // 優化的圖片組件，使用原生 img 標籤以獲得更好的 SEO 和效能
 const OptimizedImage = ({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) => {
@@ -60,6 +37,13 @@ const OptimizedImage = ({ src, alt, className, priority = false }: { src: string
 };
 
 export const HomePage = () => {
+  // 從 Google Sheet 抓取文章
+  const { articles: sheetArticles, loading: articlesLoading } = useArticles();
+  
+  // 如果 Google Sheet 還沒載入，先用預設的（為了避免畫面空白），或者只顯示載入好的
+  // 這裡我們只取前 3 篇顯示在首頁
+  const displayArticles = sheetArticles.length > 0 ? sheetArticles.slice(0, 3) : [];
+
   // 預載入關鍵圖片
   useEffect(() => {
     const preloadImages = games.slice(0, 2).map(game => {
@@ -200,31 +184,38 @@ export const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {articles.map((article) => (
-              <Link key={article.id} to={article.link} className="group block bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20">
-                <div className="relative h-48 overflow-hidden">
-                  <OptimizedImage 
-                    src={article.image} 
-                    alt={article.title}
-                    className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 left-4 bg-cyan-600/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full">
-                    {article.category}
+            {articlesLoading && displayArticles.length === 0 ? (
+              // Loading Skeleton
+              [1, 2, 3].map(i => (
+                <div key={i} className="bg-slate-900 rounded-2xl h-96 animate-pulse border border-slate-800"></div>
+              ))
+            ) : (
+              displayArticles.map((article) => (
+                <Link key={article.id} to={`/topic/${article.slug}`} className="group block bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20">
+                  <div className="relative h-48 overflow-hidden">
+                    <OptimizedImage 
+                      src={article.image} 
+                      alt={article.title}
+                      className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute top-4 left-4 bg-cyan-600/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full">
+                      {article.category}
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center text-slate-500 text-xs mb-3">
-                    <Clock size={12} className="mr-1" /> {article.date}
+                  <div className="p-6">
+                    <div className="flex items-center text-slate-500 text-xs mb-3">
+                      <Clock size={12} className="mr-1" /> {article.date}
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                      {article.title}
+                    </h3>
+                    <div className="flex items-center text-cyan-500 text-sm font-bold">
+                      閱讀全文 <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors">
-                    {article.title}
-                  </h3>
-                  <div className="flex items-center text-cyan-500 text-sm font-bold">
-                    閱讀全文 <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))
+            )}
           </div>
           
           <div className="mt-12 text-center">
