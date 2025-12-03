@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Smartphone, Trophy } from 'lucide-react';
-import { useArticles } from '../services/ArticleService'; // 引入文章服務
+import { useArticles } from '../src/services/ArticleService'; // 引入文章服務
 
 const games = [
   { name: 'TOP 體育', category: '賽事直播', image: '/images/已使用/體育.png', link: '/games/sports' },

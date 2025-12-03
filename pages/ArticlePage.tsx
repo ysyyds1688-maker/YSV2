@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArticleService, Article, useArticles } from '../services/ArticleService';
+import { ArticleService, Article, useArticles } from '../src/services/ArticleService';
 import { SEO } from '../components/SEO';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
