@@ -37,83 +37,24 @@ const articles = [
   }
 ];
 
-// 優化的圖片組件，支援預載入和懶載入
+// 優化的圖片組件，使用原生 img 標籤以獲得更好的 SEO 和效能
 const OptimizedImage = ({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) => {
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // 預載入關鍵圖片 - 立即開始載入
-    if (priority) {
-      const img = new Image();
-      img.src = src;
-      // 如果圖片已經在緩存中，立即設置為已載入
-      if (img.complete) {
-        setLoaded(true);
-      } else {
-        img.onload = () => setLoaded(true);
-        img.onerror = () => {
-          setError(true);
-          setLoaded(false);
-        };
-      }
-      return;
-    }
-    
-    // 懶載入：使用 Intersection Observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !loaded) {
-            const img = new Image();
-            img.src = src;
-            img.onload = () => {
-              setLoaded(true);
-              observer.disconnect();
-            };
-            img.onerror = () => {
-              setError(true);
-              setLoaded(false);
-              observer.disconnect();
-            };
-          }
-        });
-      },
-      { rootMargin: '50px' } // 提前 50px 開始載入
-    );
-
-    const currentRef = containerRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.disconnect();
-      }
-    };
-  }, [src, priority, loaded]);
 
   return (
-    <div ref={containerRef} className={`relative ${className || ''}`}>
+    <div className={`relative overflow-hidden ${className || ''}`}>
       {/* 載入中的骨架屏 */}
-      {!loaded && !error && (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 animate-pulse">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-700/20 to-transparent animate-shimmer"></div>
-        </div>
+      {!loaded && (
+        <div className="absolute inset-0 bg-slate-800 animate-pulse" />
       )}
-      {/* 實際圖片 - 始終渲染，但根據 loaded 狀態控制顯示 */}
-      {loaded && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
-          style={{ backgroundImage: `url("${src}")` }}
-        />
-      )}
-      {/* 錯誤狀態 */}
-      {error && (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 z-10" />
-      )}
+      <img 
+        src={src} 
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
     </div>
   );
 };
@@ -152,6 +93,8 @@ export const HomePage = () => {
           loop
           muted
           playsInline
+          preload="auto"
+          poster="/images/hero區域影片.png"
         >
           <source src="/videos/YS89.com.mp4" type="video/mp4" />
           您的瀏覽器不支援影片播放。
@@ -222,10 +165,11 @@ export const HomePage = () => {
             {games.map((game, index) => (
               <Link key={index} to={game.link} className="group relative h-80 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
                 {/* 背景圖片 */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url("${game.image}")` }}
-                ></div>
+                <OptimizedImage 
+                  src={game.image} 
+                  alt={game.name}
+                  className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-75 transition-opacity z-10"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform z-20">
                   <span className="text-cyan-400 text-xs font-bold tracking-wider uppercase mb-2 block">{game.category}</span>
@@ -259,10 +203,11 @@ export const HomePage = () => {
             {articles.map((article) => (
               <Link key={article.id} to={article.link} className="group block bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20">
                 <div className="relative h-48 overflow-hidden">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style={{ backgroundImage: `url("${article.image}")` }}
-                  ></div>
+                  <OptimizedImage 
+                    src={article.image} 
+                    alt={article.title}
+                    className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                  />
                   <div className="absolute top-4 left-4 bg-cyan-600/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full">
                     {article.category}
                   </div>
