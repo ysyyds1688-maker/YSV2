@@ -39,31 +39,51 @@ export const ArticleService = {
       window.Papa.parse(SHEET_CSV_URL, {
         download: true,
         header: true,
+        skipEmptyLines: true,
+        // 處理多行內容（HTML 可能包含換行）
+        newline: '',
+        // 引號處理，因為 Content 欄位可能包含引號和換行
+        quoteChar: '"',
+        escapeChar: '"',
         complete: (results: any) => {
+          console.log('CSV Parse Results:', results.data.length, 'rows');
+          
           const articles: Article[] = results.data
             .filter((row: any) => {
+              // 過濾掉空行
+              if (!row || Object.keys(row).length === 0) return false;
+              
               // 檢查 Status 欄位，支援 'done', 'Done', 'DONE' 等大小寫變化
-              const status = (row['Status'] || '').trim().toLowerCase();
-              return status === 'done';
+              const status = (row['Status'] || '').toString().trim().toLowerCase();
+              const isDone = status === 'done';
+              
+              // Debug: 輸出過濾狀態
+              if (row['title']) {
+                console.log(`Article "${row['title']}": Status="${status}", isDone=${isDone}`);
+              }
+              
+              return isDone;
             })
             .map((row: any, index: number) => {
               // 處理 Excerpt 欄位（注意 CSV 中可能有尾隨空格）
-              const excerpt = (row['Excerpt '] || row['Excerpt'] || '').trim();
+              const excerpt = (row['Excerpt '] || row['Excerpt'] || '').toString().trim();
+              const title = (row['title'] || '').toString().trim();
               
               return {
                 id: `google-sheet-${index}`,
-                keyword: row['Keyword'] || '',
-                title: row['title'] || '無標題',
-                content: row['Content'] || '',
+                keyword: (row['Keyword'] || '').toString().trim(),
+                title: title || '無標題',
+                content: (row['Content'] || '').toString().trim(),
                 excerpt: excerpt,
                 tags: [], // CSV 中沒有 Tags 欄位，暫時留空（未來可以從 Category 或 Keyword 衍生）
-                slug: (row['title'] || '').replace(/\s+/g, '-').toLowerCase(), // 簡單轉 slug
+                slug: title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''), // 簡單轉 slug，移除特殊字符
                 date: new Date().toISOString().split('T')[0], // 暫時用今天日期
-                category: row['Category'] || '未分類',
+                category: (row['Category'] || '未分類').toString().trim(),
                 image: DEFAULT_IMAGES[index % DEFAULT_IMAGES.length] // 輪播圖片
               };
             });
           
+          console.log('Filtered articles:', articles.length);
           resolve(articles);
         },
         error: (error: any) => {
