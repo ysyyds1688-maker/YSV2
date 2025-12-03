@@ -21,6 +21,7 @@ import { SecurityPage } from './pages/trust/SecurityPage';
 import { ContactPage } from './pages/trust/ContactPage';
 import { InfluencerPage } from './pages/trust/InfluencerPage';
 import { NewsDetailPage } from './pages/NewsDetailPage';
+import { ArticlePage } from './pages/ArticlePage';
 // 遊戲攻略
 import { GameGuidesIndexPage } from './pages/guides/games/GameGuidesIndexPage';
 import { BaccaratGuidesIndexPage } from './pages/guides/games/baccarat/BaccaratGuidesIndexPage';
@@ -154,10 +155,10 @@ export default function App() {
               <Route path="/promotions" element={<PromotionsPage />} />
               <Route path="/promotions/monthly/:year/:month" element={<MonthlyPromotionsPage />} />
 
-              {/* 論壇專區 */}
+              {/* 論壇專區 (與 SEO 文章共用 topic 路徑) */}
               <Route path="/forum" element={<ForumIndexPage />} />
               <Route path="/forum/c/:category" element={<ForumCategoryPage />} />
-              <Route path="/topic/:slug" element={<TopicPage />} />
+              <Route path="/topic/:slug" element={<ArticlePage />} />
 
               {/* 最新消息 */}
               <Route path="/news" element={<NewsPage />} />
