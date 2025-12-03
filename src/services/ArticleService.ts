@@ -41,15 +41,22 @@ export const ArticleService = {
         header: true,
         complete: (results: any) => {
           const articles: Article[] = results.data
-            .filter((row: any) => row['是否發布'] === 'done' || row['是否發布'] === 'Done') // 只抓已發布的
+            .filter((row: any) => {
+              // 檢查 Status 欄位，支援 'done', 'Done', 'DONE' 等大小寫變化
+              const status = (row['Status'] || '').trim().toLowerCase();
+              return status === 'done';
+            })
             .map((row: any, index: number) => {
+              // 處理 Excerpt 欄位（注意 CSV 中可能有尾隨空格）
+              const excerpt = (row['Excerpt '] || row['Excerpt'] || '').trim();
+              
               return {
                 id: `google-sheet-${index}`,
                 keyword: row['Keyword'] || '',
                 title: row['title'] || '無標題',
                 content: row['Content'] || '',
-                excerpt: row['Excerpt'] || '',
-                tags: (row['Tags'] || '').split(',').map((t: string) => t.trim()),
+                excerpt: excerpt,
+                tags: [], // CSV 中沒有 Tags 欄位，暫時留空（未來可以從 Category 或 Keyword 衍生）
                 slug: (row['title'] || '').replace(/\s+/g, '-').toLowerCase(), // 簡單轉 slug
                 date: new Date().toISOString().split('T')[0], // 暫時用今天日期
                 category: row['Category'] || '未分類',
