@@ -82,7 +82,7 @@ const parseCSV = (url: string): Promise<Article[]> => {
               id: `google-sheet-${url}-${index}`, // 使用 URL 作為 ID 的一部分，避免衝突
               keyword: (row['Keyword'] || '').toString().trim(),
               title: title || '無標題',
-              content: (row['Content'] || '').toString().trim(),
+              content: (row['Content'] || row['content'] || row['body'] || row['Body'] || '').toString().trim(),
               excerpt: excerpt,
               // 處理 Tags：優先從 CSV 讀取，如果沒有則從 Category 和 Keyword 衍生
               tags: (() => {
