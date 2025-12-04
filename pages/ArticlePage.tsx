@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArticleService, Article, useArticles } from '../src/services/ArticleService';
 import { SEO } from '../components/SEO';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
 import { ArrowLeft, Calendar, Tag, User, Clock } from 'lucide-react';
 
 export const ArticlePage = () => {
@@ -54,15 +52,14 @@ export const ArticlePage = () => {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white font-sans">
+    <>
       <SEO 
         title={`${article.title} - YS 娛樂論壇`}
         description={article.excerpt}
         keywords={article.tags.join(', ')}
       />
-      <Navbar />
       
-      <main className="pt-24 pb-16">
+      <div className="pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <div className="mb-8">
@@ -157,10 +154,8 @@ export const ArticlePage = () => {
             </div>
           )}
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
