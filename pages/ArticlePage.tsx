@@ -109,17 +109,27 @@ export const ArticlePage = () => {
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
 
-          {/* Tags */}
-          <div className="mt-12 pt-8 border-t border-slate-800">
-            <div className="flex flex-wrap gap-2">
-              {article.tags.map((tag, index) => (
-                <span key={index} className="inline-flex items-center px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm hover:bg-slate-700 transition-colors cursor-pointer">
-                  <Tag size={14} className="mr-2 text-cyan-500" />
-                  {tag}
-                </span>
-              ))}
-            </div>
+          {/* 免責聲明 */}
+          <div className="mt-12 p-6 bg-slate-900/50 border-l-4 border-amber-500/50 rounded-r-lg">
+            <p className="text-sm text-slate-400 leading-relaxed">
+              <strong className="text-amber-400">免責聲明：</strong>
+              以上內容純屬個人建議與經驗分享，不代表本論壇立場。所有資訊僅供參考，請讀者自行判斷並承擔風險。本論壇不對任何因使用上述資訊而導致的損失負責。理性投注，量力而為。
+            </p>
           </div>
+
+          {/* Tags */}
+          {article.tags && article.tags.length > 0 && (
+            <div className="mt-12 pt-8 border-t border-slate-800">
+              <div className="flex flex-wrap gap-2">
+                {article.tags.map((tag, index) => (
+                  <span key={index} className="inline-flex items-center px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm hover:bg-slate-700 transition-colors cursor-pointer">
+                    <Tag size={14} className="mr-2 text-cyan-500" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Related Articles */}
           {articles.length > 0 && (
