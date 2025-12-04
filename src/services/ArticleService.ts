@@ -105,7 +105,16 @@ const parseCSV = (url: string): Promise<Article[]> => {
                 }
                 return derivedTags.filter((tag, index, self) => self.indexOf(tag) === index); // 去重
               })(),
-              slug: title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''), // 簡單轉 slug，移除特殊字符
+              // 生成標準化的 slug（與前端匹配邏輯一致）
+              slug: (() => {
+                if (!title) return '';
+                return title
+                  .replace(/\s+/g, '-')
+                  .toLowerCase()
+                  .replace(/[^\w\u4e00-\u9fa5-]/g, '') // 保留中文、英文、數字和連字符
+                  .replace(/-+/g, '-') // 將多個連字符合併為一個
+                  .replace(/^-|-$/g, ''); // 移除開頭和結尾的連字符
+              })(),
               // 優先從 Google Sheet 讀取 Date 欄位，如果沒有則使用當前日期
               date: (row['Date'] || row['date'] || new Date().toISOString().split('T')[0]).toString().trim(),
               category: (row['Category'] || '未分類').toString().trim(),
