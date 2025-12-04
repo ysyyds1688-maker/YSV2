@@ -6,23 +6,16 @@ import { ArrowLeft, Calendar, Tag, User, Clock } from 'lucide-react';
 
 export const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState(true);
-  const { articles: relatedArticles } = useArticles();
-
-  useEffect(() => {
-    if (slug) {
-      setLoading(true);
-      ArticleService.getArticleBySlug(slug)
-        .then(data => {
-          setArticle(data || null);
-          setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    }
-  }, [slug]);
+  const { articles, loading: articlesLoading } = useArticles();
+  
+  // 從已載入的文章列表中找出當前文章（避免重複請求）
+  const article = articles.find(a => {
+    // 比對 slug 或 title
+    const articleSlug = a.slug || a.title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, '');
+    return articleSlug === slug || a.title === slug;
+  }) || null;
+  
+  const loading = articlesLoading;
 
   // 捲動到頂部
   useEffect(() => {
@@ -46,9 +39,9 @@ export const ArticlePage = () => {
     );
   }
 
-  // 過濾出相關文章 (同分類或隨機)
-  const otherArticles = relatedArticles
-    .filter(a => a.id !== article.id)
+  // 過濾出相關文章 (同分類或隨機，排除當前文章)
+  const otherArticles = articles
+    .filter(a => article && a.id !== article.id)
     .slice(0, 3);
 
   return (
@@ -129,7 +122,7 @@ export const ArticlePage = () => {
           </div>
 
           {/* Related Articles */}
-          {relatedArticles.length > 0 && (
+          {articles.length > 0 && (
             <div className="mt-16 pt-16 border-t border-slate-800">
               <h3 className="text-2xl font-bold mb-8">延伸閱讀</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
