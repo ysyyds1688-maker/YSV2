@@ -77,7 +77,8 @@ export const ArticleService = {
                 excerpt: excerpt,
                 tags: [], // CSV 中沒有 Tags 欄位，暫時留空（未來可以從 Category 或 Keyword 衍生）
                 slug: title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''), // 簡單轉 slug，移除特殊字符
-                date: new Date().toISOString().split('T')[0], // 暫時用今天日期
+                // 優先從 Google Sheet 讀取 Date 欄位，如果沒有則使用當前日期
+                date: (row['Date'] || row['date'] || new Date().toISOString().split('T')[0]).toString().trim(),
                 category: (row['Category'] || '未分類').toString().trim(),
                 image: DEFAULT_IMAGES[index % DEFAULT_IMAGES.length] // 輪播圖片
               };
