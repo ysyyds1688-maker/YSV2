@@ -168,3 +168,93 @@ public/images/
 - ✅ 完成導航欄 Banner 圖片
 - ✅ 完成首頁熱門遊戲區塊圖片
 - ✅ 完成遊戲專區頁面所有卡片圖片
+
+---
+
+## 🔄 自動化內容系統狀態（n8n + Google Sheet）
+
+### ✅ 已完成
+
+- **Google Sheet 作為唯一文章資料來源**
+  - 前端 `ArticleService.ts` 會從同一份 Google Sheet 的 **4 個分頁** 讀取 CSV：
+    - 娛樂城評價類（高轉換意圖）
+    - 優惠活動類（吸流量）
+    - 真人百家樂類（高含金量）
+    - 體育與電子類
+  - 所有頁面共用這一份 Sheet：
+    - 首頁「本週熱門話題」
+    - `/topic/:slug` 文章頁（`ArticlePage`）
+    - 論壇首頁 `/forum` 熱門討論
+    - 論壇分類頁 `/forum/c/:id`
+
+- **n8n 自動發文工作流**
+  - 已串接：Google Sheets → Serper.dev 搜尋 → AI Agent（OpenAI/Gemini）→ Code 節點（`n8n_Code節點_最終版本.txt`）→ Google Sheets 寫回
+  - AI Prompt 已整理成多個版本，最終使用：`n8n_AI_Agent_Prompt_完整版_含免責聲明.md`
+    - 動態年份處理（根據搜尋結果或使用「目前/最新」等相對時間）
+    - 風格智能匹配（`n8n_Code節點_風格智能匹配.txt`）
+    - 免責聲明內嵌在文章 conclusion，前端只再顯示一次
+  - Code 節點負責：
+    - 解析 AI 回傳的 JSON（含處理 ```json 包裹、亂碼、前後雜訊）
+    - 組裝標準化欄位：`title` / `body` / `description`
+    - 輸出到 Sheet 的欄位：`Keyword` / `Category` / `GEO` / `title` / `body` / `description`
+
+- **前端與 slug / 內容整合**
+  - `ArticleService.ts`：
+    - 支援多個欄位作為內容來源：`Content` / `content` / `body` / `Body`
+    - 產生統一規則的 `slug`（支援中文、英文、數字與連字號）
+    - 合併四個分頁、依日期排序
+  - `ArticlePage.tsx` / `TopicPage.tsx`：
+    - 使用相同的 `generateSlug` 邏輯做比對
+    - 優先比對 `slug`，其次 `title` / 標準化 slug
+    - 找不到文章時會輸出 debug log（方便開發時檢查）
+  - 論壇頁面已全改為讀取 Google Sheet：
+    - `ForumIndexPage` 熱門討論改用 `useArticles()`
+    - `ForumCategoryPage` 依 `Category` 與論壇分類對應篩選文章
+
+- **自動補充關鍵字工作流（規劃完成，Code 已就緒）**
+  - 文件：`n8n_自動補充關鍵字工作流指南.md`
+  - 方案 B（預定義列表，不用 AI）已提供完整 Code：
+    - Code 檔：`n8n_自動補充關鍵字_Code節點.txt`
+    - 每個分類有一組關鍵字庫（娛樂城評價 / 優惠活動 / 遊戲攻略 / 防詐騙 / 綜合討論）
+    - 支援去重：不會重複現有關鍵字
+    - 直接輸出標準欄位：`Keyword` / `Category` / `GEO` / `Status=pending`
+
+### ⏳ 待完成 To-do（優先度由高到低）
+
+> 以下對應內部 todo 工具中的項目，方便後續接手或自己回來繼續。
+
+- **test-full-workflow**（高）  
+  - 從「關鍵字 pending → n8n 發文 → Sheet `Status=done` → 前端顯示」跑一次完整流程  
+  - 確認四個分頁的文章都能正常出現在網站上，slug 與內容無誤
+
+- **confirm-5-sheets-structure**（中）  
+  - 目前已整合 4 個主分頁，如未來新增第 5 類（例如「綜合討論類」）需：  
+    - 在同一份 Sheet 新增分頁  
+    - 依照現有欄位結構：`Keyword | GEO | Category | Content | title | Excerpt | Status | Date`
+    - 更新 `SHEET_CSV_URLS` 與對應的 `Category` 邏輯（如有需要）
+
+- **test-different-keywords**（中）  
+  - 在每個分頁加入多組不同意圖的關鍵字，測試：  
+    - AI 是否依關鍵字生成不同文章（不重複、不洗稿）  
+    - 風格匹配是否正確（防詐騙/優惠/攻略/評價）
+
+- **add-more-keywords**（中）  
+  - 透過「自動補充關鍵字」 workflow 或手動方式，為四個分頁補足 20–30 組高品質關鍵字  
+  - 建議先從方案 B（預定義列表）開始，之後再視需要接 AI 生成方案
+
+- **setup-date-field**（中）  
+  - 在 n8n 的「Google Sheets Update / Append」節點中，統一寫入 `Date` 欄位：  
+    - 可用 n8n 表達式：`{{$now}}` 或格式化為 `YYYY-MM-DD`  
+    - 確保前端排序與顯示日期正確
+
+- **setup-auto-schedule**（中）  
+  - 為以下 workflow 設定自動排程（Cron）：  
+    - 每日自動發文 workflow（依各分頁/分類）  
+    - 自動補充關鍵字 workflow（例如每天或每週補一次）
+
+- **（可選）AI 版關鍵字補充**（低）  
+  - 若之後要啟動 AI 生成關鍵字：  
+    - 使用 `n8n_自動補充關鍵字_AI_Prompt.md` 作為 AI Agent 的 Prompt  
+    - Code 解析：`n8n_自動補充關鍵字_AI生成版_Code節點.txt`  
+    - 建議先小量測試，確認關鍵字品質與去重邏輯
+
