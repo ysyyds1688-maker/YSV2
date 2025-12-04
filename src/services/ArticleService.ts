@@ -34,18 +34,45 @@ const DEFAULT_IMAGES = [
   '/images/已使用/首頁文章3.png'
 ];
 
-// 解析單個 CSV 連結
-const parseCSV = (url: string): Promise<Article[]> => {
-  return new Promise((resolve, reject) => {
-    // @ts-ignore - Papa is loaded from CDN
-    if (!window.Papa) {
-      console.error('PapaParse not loaded');
-      reject('PapaParse not loaded');
+// 等待 PapaParse 載入的輔助函數
+const waitForPapa = (): Promise<void> => {
+  return new Promise((resolve) => {
+    // @ts-ignore
+    if (window.Papa) {
+      resolve();
       return;
     }
+    
+    // 等待最多 5 秒
+    let attempts = 0;
+    const maxAttempts = 50; // 5秒 = 50 * 100ms
+    const checkInterval = setInterval(() => {
+      // @ts-ignore
+      if (window.Papa) {
+        clearInterval(checkInterval);
+        resolve();
+      } else if (++attempts >= maxAttempts) {
+        clearInterval(checkInterval);
+        console.error('PapaParse failed to load after 5 seconds');
+        resolve(); // 仍然 resolve，讓後續邏輯處理錯誤
+      }
+    }, 100);
+  });
+};
 
-    // @ts-ignore
-    window.Papa.parse(url, {
+// 解析單個 CSV 連結
+const parseCSV = (url: string): Promise<Article[]> => {
+  return waitForPapa().then(() => {
+    return new Promise((resolve, reject) => {
+      // @ts-ignore - Papa is loaded from CDN
+      if (!window.Papa) {
+        console.error('PapaParse not loaded');
+        resolve([]); // 改為 resolve 空陣列，避免中斷其他分頁
+        return;
+      }
+
+      // @ts-ignore
+      window.Papa.parse(url, {
       download: true,
       header: true,
       skipEmptyLines: true,
@@ -131,6 +158,7 @@ const parseCSV = (url: string): Promise<Article[]> => {
         resolve([]);
       }
     });
+  });
   });
 };
 
