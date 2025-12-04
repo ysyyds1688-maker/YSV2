@@ -25,14 +25,12 @@ export default defineConfig(({ mode }) => {
       },
       optimizeDeps: {
         include: ['react', 'react-dom', 'react-router-dom'],
+        force: true, // 強制重新優化依賴
       },
       build: {
-        rollupOptions: {
-          output: {
-            manualChunks: {
-              'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            },
-          },
+        commonjsOptions: {
+          include: [/node_modules/],
+          transformMixedEsModules: true,
         },
       },
     };
