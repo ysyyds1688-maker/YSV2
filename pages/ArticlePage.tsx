@@ -10,9 +10,25 @@ export const ArticlePage = () => {
   
   // 從已載入的文章列表中找出當前文章（避免重複請求）
   const article = articles.find(a => {
-    // 比對 slug 或 title
-    const articleSlug = a.slug || a.title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, '');
-    return articleSlug === slug || a.title === slug;
+    // 生成標準化的 slug（統一處理方式）
+    const generateSlug = (text: string) => {
+      return text
+        .replace(/\s+/g, '-')
+        .toLowerCase()
+        .replace(/[^\w\u4e00-\u9fa5-]/g, '') // 保留中文、英文、數字和連字符
+        .replace(/-+/g, '-') // 將多個連字符合併為一個
+        .replace(/^-|-$/g, ''); // 移除開頭和結尾的連字符
+    };
+    
+    // 比對 slug（優先）或 title
+    const articleSlug = a.slug || generateSlug(a.title);
+    const urlSlug = slug || '';
+    
+    // 多種比對方式：完全匹配、標題匹配、slug 匹配
+    return articleSlug === urlSlug || 
+           a.title === urlSlug || 
+           generateSlug(a.title) === urlSlug ||
+           generateSlug(a.title) === generateSlug(urlSlug);
   }) || null;
   
   const loading = articlesLoading;
@@ -97,25 +113,26 @@ export const ArticlePage = () => {
           </div>
 
           {/* Article Content */}
-          <article 
-            className="prose prose-invert prose-lg max-w-none 
-              prose-headings:text-white prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4
-              prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
-              prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-white prose-strong:font-bold
-              prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:text-slate-300
-              prose-li:mb-2
-              prose-blockquote:border-l-4 prose-blockquote:border-cyan-500 prose-blockquote:bg-slate-900/50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
-
-          {/* 免責聲明 */}
-          <div className="mt-12 p-6 bg-slate-900/50 border-l-4 border-amber-500/50 rounded-r-lg">
-            <p className="text-sm text-slate-400 leading-relaxed">
-              <strong className="text-amber-400">免責聲明：</strong>
-              以上內容純屬個人建議與經驗分享，不代表本論壇立場。所有資訊僅供參考，請讀者自行判斷並承擔風險。本論壇不對任何因使用上述資訊而導致的損失負責。理性投注，量力而為。
-            </p>
-          </div>
+          {/* 注意：免責聲明已經包含在 AI 生成的文章內容中（conclusion 段落），不需要額外添加 */}
+          {article.content && article.content.trim() ? (
+            <article 
+              className="prose prose-invert prose-lg max-w-none 
+                prose-headings:text-white prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4
+                prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
+                prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-white prose-strong:font-bold
+                prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:text-slate-300
+                prose-li:mb-2
+                prose-blockquote:border-l-4 prose-blockquote:border-cyan-500 prose-blockquote:bg-slate-900/50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg"
+              dangerouslySetInnerHTML={{ __html: article.content }}
+            />
+          ) : (
+            <div className="bg-yellow-500/10 border-l-4 border-yellow-500/50 rounded-r-lg p-6 mb-8">
+              <p className="text-yellow-200">
+                <strong>提示：</strong> 這篇文章的內容尚未完成，請稍後再來查看。
+              </p>
+            </div>
+          )}
 
           {/* Tags */}
           {article.tags && article.tags.length > 0 && (
