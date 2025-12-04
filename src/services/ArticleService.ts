@@ -75,7 +75,27 @@ export const ArticleService = {
                 title: title || '無標題',
                 content: (row['Content'] || '').toString().trim(),
                 excerpt: excerpt,
-                tags: [], // CSV 中沒有 Tags 欄位，暫時留空（未來可以從 Category 或 Keyword 衍生）
+                // 處理 Tags：優先從 CSV 讀取，如果沒有則從 Category 和 Keyword 衍生
+                tags: (() => {
+                  const csvTags = (row['Tags'] || row['tags'] || '').toString().trim();
+                  if (csvTags) {
+                    // 如果有 Tags 欄位，分割並清理
+                    return csvTags.split(',').map((t: string) => t.trim()).filter((t: string) => t.length > 0);
+                  }
+                  // 如果沒有 Tags，從 Category 和 Keyword 衍生
+                  const category = (row['Category'] || '').toString().trim();
+                  const keyword = (row['Keyword'] || '').toString().trim();
+                  const derivedTags: string[] = [];
+                  if (category && category !== '未分類') {
+                    derivedTags.push(category);
+                  }
+                  // 從關鍵字提取主要詞彙作為標籤
+                  if (keyword) {
+                    const keywordParts = keyword.split(/\s+/).filter((part: string) => part.length > 1);
+                    derivedTags.push(...keywordParts.slice(0, 3)); // 最多取前 3 個詞
+                  }
+                  return derivedTags.filter((tag, index, self) => self.indexOf(tag) === index); // 去重
+                })(),
                 slug: title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''), // 簡單轉 slug，移除特殊字符
                 // 優先從 Google Sheet 讀取 Date 欄位，如果沒有則使用當前日期
                 date: (row['Date'] || row['date'] || new Date().toISOString().split('T')[0]).toString().trim(),
