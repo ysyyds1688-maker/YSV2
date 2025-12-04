@@ -25,11 +25,35 @@ export const ArticlePage = () => {
     const urlSlug = slug || '';
     
     // 多種比對方式：完全匹配、標題匹配、slug 匹配
-    return articleSlug === urlSlug || 
-           a.title === urlSlug || 
-           generateSlug(a.title) === urlSlug ||
-           generateSlug(a.title) === generateSlug(urlSlug);
+    const matches = articleSlug === urlSlug || 
+                    a.title === urlSlug || 
+                    generateSlug(a.title) === urlSlug ||
+                    generateSlug(a.title) === generateSlug(urlSlug);
+    
+    // 調試信息（只在開發環境）
+    if (process.env.NODE_ENV === 'development' && matches) {
+      console.log('Article matched:', {
+        title: a.title,
+        articleSlug,
+        urlSlug,
+        slug: a.slug
+      });
+    }
+    
+    return matches;
   }) || null;
+  
+  // 調試信息：如果找不到文章，輸出所有文章的 slug 和標題
+  useEffect(() => {
+    if (!article && !loading && slug) {
+      console.warn('Article not found for slug:', slug);
+      console.log('Available articles:', articles.map(a => ({
+        title: a.title,
+        slug: a.slug || a.title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''),
+        id: a.id
+      })));
+    }
+  }, [article, loading, slug, articles]);
   
   const loading = articlesLoading;
 
