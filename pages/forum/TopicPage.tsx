@@ -11,8 +11,25 @@ export const TopicPage = () => {
   
   // 從真實文章數據中查找
   const article = articles.find(a => {
-    const articleSlug = a.slug || a.title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, '');
-    return articleSlug === slug || a.title === slug;
+    // 生成標準化的 slug（統一處理方式）
+    const generateSlug = (text: string) => {
+      return text
+        .replace(/\s+/g, '-')
+        .toLowerCase()
+        .replace(/[^\w\u4e00-\u9fa5-]/g, '') // 保留中文、英文、數字和連字符
+        .replace(/-+/g, '-') // 將多個連字符合併為一個
+        .replace(/^-|-$/g, ''); // 移除開頭和結尾的連字符
+    };
+    
+    // 比對 slug（優先）或 title
+    const articleSlug = a.slug || generateSlug(a.title);
+    const urlSlug = slug || '';
+    
+    // 多種比對方式：完全匹配、標題匹配、slug 匹配
+    return articleSlug === urlSlug || 
+           a.title === urlSlug || 
+           generateSlug(a.title) === urlSlug ||
+           generateSlug(a.title) === generateSlug(urlSlug);
   });
   
   if (loading) {

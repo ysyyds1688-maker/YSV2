@@ -2,7 +2,8 @@ import React from 'react';
 import { SEO } from '../../components/SEO';
 import { Breadcrumb } from '../../components/Breadcrumb';
 import { Link } from 'react-router-dom';
-import { FORUM_CATEGORIES, FORUM_TOPICS } from '@/data/mockForumData';
+import { FORUM_CATEGORIES } from '@/data/mockForumData';
+import { useArticles } from '../../src/services/ArticleService';
 import { MessageSquare, Star, BookOpen, Gift, TrendingUp, Clock, Eye, MessageCircle } from 'lucide-react';
 
 const IconMap: Record<string, React.ElementType> = {
@@ -13,7 +14,10 @@ const IconMap: Record<string, React.ElementType> = {
 };
 
 export const ForumIndexPage = () => {
-  const recentTopics = FORUM_TOPICS.slice(0, 5);
+  // 使用真實文章數據
+  const { articles, loading } = useArticles();
+  // 取前 5 篇作為熱門討論
+  const recentTopics = articles.slice(0, 5);
 
   return (
     <>
@@ -70,60 +74,60 @@ export const ForumIndexPage = () => {
               </div>
               
               <div className="space-y-4">
-                {recentTopics.map((topic) => (
-                  <Link 
-                    key={topic.id} 
-                    to={`/topic/${topic.slug}`}
-                    className="block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 hover:bg-slate-800/50 transition-all"
-                  >
-                    <div className="flex flex-col sm:flex-row h-full">
-                       {/* Thumbnail */}
-                       <div className="sm:w-48 h-48 sm:h-auto relative shrink-0">
-                         <div 
-                           className="absolute inset-0 bg-cover bg-center"
-                           style={{ backgroundImage: `url("${topic.image}")` }}
-                         />
-                         <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
-                       </div>
-                       
-                       {/* Content */}
-                      <div className="flex-1 p-6 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="px-2 py-1 bg-slate-800 text-cyan-400 text-xs rounded font-medium">
-                              {FORUM_CATEGORIES.find(c => c.id === topic.categoryId)?.name}
-                            </span>
-                            <span className="text-slate-500 text-xs flex items-center gap-1">
-                              <Clock size={12} />
-                              {topic.date}
+                {loading ? (
+                  <div className="text-center py-12 text-slate-400">載入中...</div>
+                ) : recentTopics.length === 0 ? (
+                  <div className="text-center py-12 text-slate-400">目前還沒有文章</div>
+                ) : (
+                  recentTopics.map((article) => (
+                    <Link 
+                      key={article.id} 
+                      to={`/topic/${article.slug}`}
+                      className="block bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 hover:bg-slate-800/50 transition-all"
+                    >
+                      <div className="flex flex-col sm:flex-row h-full">
+                         {/* Thumbnail */}
+                         <div className="sm:w-48 h-48 sm:h-auto relative shrink-0">
+                           <div 
+                             className="absolute inset-0 bg-cover bg-center"
+                             style={{ backgroundImage: `url("${article.image}")` }}
+                           />
+                           <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
+                         </div>
+                         
+                         {/* Content */}
+                        <div className="flex-1 p-6 flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="px-2 py-1 bg-slate-800 text-cyan-400 text-xs rounded font-medium">
+                                {article.category}
+                              </span>
+                              <span className="text-slate-500 text-xs flex items-center gap-1">
+                                <Clock size={12} />
+                                {article.date}
+                              </span>
+                            </div>
+                            <h3 className="text-lg font-bold text-white mb-2 line-clamp-1 hover:text-cyan-400 transition-colors">
+                              {article.title}
+                            </h3>
+                            <p className="text-slate-400 text-sm line-clamp-2 mb-4">
+                              {article.excerpt}
+                            </p>
+                          </div>
+                          
+                          <div className="flex items-center gap-4 text-xs text-slate-500 mt-auto">
+                            <span className="flex items-center gap-1">
+                              <span className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-white text-[10px]">
+                                Y
+                              </span>
+                              YS 編輯部
                             </span>
                           </div>
-                          <h3 className="text-lg font-bold text-white mb-2 line-clamp-1 hover:text-cyan-400 transition-colors">
-                            {topic.title}
-                          </h3>
-                          <p className="text-slate-400 text-sm line-clamp-2 mb-4">
-                            {topic.summary}
-                          </p>
-                        </div>
-                        
-                        <div className="flex items-center gap-4 text-xs text-slate-500 mt-auto">
-                          <span className="flex items-center gap-1">
-                            <span className="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-white text-[10px]">
-                              {topic.author[0]}
-                            </span>
-                            {topic.author}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Eye size={12} /> {topic.views}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MessageCircle size={12} /> {topic.replies}
-                          </span>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
 
