@@ -14,8 +14,18 @@ export interface Article {
   image: string; // 預設圖片
 }
 
-// Google Sheet CSV 連結
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTppUqCnAnjejecRJ_C-NWDYVIubEalTIzJFq9tTJD9vjMYKYGlLj06IlYBX15S09HpEanMP2lZmVPZ/pub?output=csv';
+// 多個 Google Sheet CSV 連結（支援多分頁）
+// Sheet ID: 1eMQUXRcn9-wELa8cLoK6kXrdnEnkZoMyMzAtCH1Bmes
+const SHEET_CSV_URLS = [
+  // 分頁 1：娛樂城評價類 (高轉換意圖)
+  'https://docs.google.com/spreadsheets/d/1eMQUXRcn9-wELa8cLoK6kXrdnEnkZoMyMzAtCH1Bmes/export?format=csv&gid=927317477',
+  // 分頁 2：優惠活動類 (吸流量)
+  'https://docs.google.com/spreadsheets/d/1eMQUXRcn9-wELa8cLoK6kXrdnEnkZoMyMzAtCH1Bmes/export?format=csv&gid=677810879',
+  // 分頁 3：真人百家樂類 (高含金量)
+  'https://docs.google.com/spreadsheets/d/1eMQUXRcn9-wELa8cLoK6kXrdnEnkZoMyMzAtCH1Bmes/export?format=csv&gid=80898864',
+  // 分頁 4：體育與電子類
+  'https://docs.google.com/spreadsheets/d/1eMQUXRcn9-wELa8cLoK6kXrdnEnkZoMyMzAtCH1Bmes/export?format=csv&gid=1456663743',
+];
 
 // 預設圖片庫 (隨機分配給文章)
 const DEFAULT_IMAGES = [
@@ -24,95 +34,127 @@ const DEFAULT_IMAGES = [
   '/images/已使用/首頁文章3.png'
 ];
 
-export const ArticleService = {
-  // 抓取所有文章
-  async getAllArticles(): Promise<Article[]> {
-    return new Promise((resolve, reject) => {
-      // @ts-ignore - Papa is loaded from CDN
-      if (!window.Papa) {
-        console.error('PapaParse not loaded');
-        reject('PapaParse not loaded');
-        return;
-      }
+// 解析單個 CSV 連結
+const parseCSV = (url: string): Promise<Article[]> => {
+  return new Promise((resolve, reject) => {
+    // @ts-ignore - Papa is loaded from CDN
+    if (!window.Papa) {
+      console.error('PapaParse not loaded');
+      reject('PapaParse not loaded');
+      return;
+    }
 
-      // @ts-ignore
-      window.Papa.parse(SHEET_CSV_URL, {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        // 處理多行內容（HTML 可能包含換行）
-        newline: '',
-        // 引號處理，因為 Content 欄位可能包含引號和換行
-        quoteChar: '"',
-        escapeChar: '"',
-        complete: (results: any) => {
-          console.log('CSV Parse Results:', results.data.length, 'rows');
-          
-          const articles: Article[] = results.data
-            .filter((row: any) => {
-              // 過濾掉空行
-              if (!row || Object.keys(row).length === 0) return false;
-              
-              // 檢查 Status 欄位，支援 'done', 'Done', 'DONE' 等大小寫變化
-              const status = (row['Status'] || '').toString().trim().toLowerCase();
-              const isDone = status === 'done';
-              
-              // Debug: 輸出過濾狀態
-              if (row['title']) {
-                console.log(`Article "${row['title']}": Status="${status}", isDone=${isDone}`);
-              }
-              
-              return isDone;
-            })
-            .map((row: any, index: number) => {
-              // 處理 Excerpt 欄位（注意 CSV 中可能有尾隨空格）
-              const excerpt = (row['Excerpt '] || row['Excerpt'] || '').toString().trim();
-              const title = (row['title'] || '').toString().trim();
-              
-              return {
-                id: `google-sheet-${index}`,
-                keyword: (row['Keyword'] || '').toString().trim(),
-                title: title || '無標題',
-                content: (row['Content'] || '').toString().trim(),
-                excerpt: excerpt,
-                // 處理 Tags：優先從 CSV 讀取，如果沒有則從 Category 和 Keyword 衍生
-                tags: (() => {
-                  const csvTags = (row['Tags'] || row['tags'] || '').toString().trim();
-                  if (csvTags) {
-                    // 如果有 Tags 欄位，分割並清理
-                    return csvTags.split(',').map((t: string) => t.trim()).filter((t: string) => t.length > 0);
-                  }
-                  // 如果沒有 Tags，從 Category 和 Keyword 衍生
-                  const category = (row['Category'] || '').toString().trim();
-                  const keyword = (row['Keyword'] || '').toString().trim();
-                  const derivedTags: string[] = [];
-                  if (category && category !== '未分類') {
-                    derivedTags.push(category);
-                  }
-                  // 從關鍵字提取主要詞彙作為標籤
-                  if (keyword) {
-                    const keywordParts = keyword.split(/\s+/).filter((part: string) => part.length > 1);
-                    derivedTags.push(...keywordParts.slice(0, 3)); // 最多取前 3 個詞
-                  }
-                  return derivedTags.filter((tag, index, self) => self.indexOf(tag) === index); // 去重
-                })(),
-                slug: title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''), // 簡單轉 slug，移除特殊字符
-                // 優先從 Google Sheet 讀取 Date 欄位，如果沒有則使用當前日期
-                date: (row['Date'] || row['date'] || new Date().toISOString().split('T')[0]).toString().trim(),
-                category: (row['Category'] || '未分類').toString().trim(),
-                image: DEFAULT_IMAGES[index % DEFAULT_IMAGES.length] // 輪播圖片
-              };
-            });
-          
-          console.log('Filtered articles:', articles.length);
-          resolve(articles);
-        },
-        error: (error: any) => {
-          console.error('CSV Parse Error:', error);
-          reject(error);
-        }
-      });
+    // @ts-ignore
+    window.Papa.parse(url, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      // 處理多行內容（HTML 可能包含換行）
+      newline: '',
+      // 引號處理，因為 Content 欄位可能包含引號和換行
+      quoteChar: '"',
+      escapeChar: '"',
+      complete: (results: any) => {
+        console.log(`CSV Parse Results from ${url}:`, results.data.length, 'rows');
+        
+        const articles: Article[] = results.data
+          .filter((row: any) => {
+            // 過濾掉空行
+            if (!row || Object.keys(row).length === 0) return false;
+            
+            // 檢查 Status 欄位，支援 'done', 'Done', 'DONE' 等大小寫變化
+            const status = (row['Status'] || '').toString().trim().toLowerCase();
+            const isDone = status === 'done';
+            
+            // Debug: 輸出過濾狀態
+            if (row['title']) {
+              console.log(`Article "${row['title']}": Status="${status}", isDone=${isDone}`);
+            }
+            
+            return isDone;
+          })
+          .map((row: any, index: number) => {
+            // 處理 Excerpt 欄位（注意 CSV 中可能有尾隨空格）
+            const excerpt = (row['Excerpt '] || row['Excerpt'] || '').toString().trim();
+            const title = (row['title'] || '').toString().trim();
+            
+            return {
+              id: `google-sheet-${url}-${index}`, // 使用 URL 作為 ID 的一部分，避免衝突
+              keyword: (row['Keyword'] || '').toString().trim(),
+              title: title || '無標題',
+              content: (row['Content'] || '').toString().trim(),
+              excerpt: excerpt,
+              // 處理 Tags：優先從 CSV 讀取，如果沒有則從 Category 和 Keyword 衍生
+              tags: (() => {
+                const csvTags = (row['Tags'] || row['tags'] || '').toString().trim();
+                if (csvTags) {
+                  // 如果有 Tags 欄位，分割並清理
+                  return csvTags.split(',').map((t: string) => t.trim()).filter((t: string) => t.length > 0);
+                }
+                // 如果沒有 Tags，從 Category 和 Keyword 衍生
+                const category = (row['Category'] || '').toString().trim();
+                const keyword = (row['Keyword'] || '').toString().trim();
+                const derivedTags: string[] = [];
+                if (category && category !== '未分類') {
+                  derivedTags.push(category);
+                }
+                // 從關鍵字提取主要詞彙作為標籤
+                if (keyword) {
+                  const keywordParts = keyword.split(/\s+/).filter((part: string) => part.length > 1);
+                  derivedTags.push(...keywordParts.slice(0, 3)); // 最多取前 3 個詞
+                }
+                return derivedTags.filter((tag, index, self) => self.indexOf(tag) === index); // 去重
+              })(),
+              slug: title.replace(/\s+/g, '-').toLowerCase().replace(/[^\w-]/g, ''), // 簡單轉 slug，移除特殊字符
+              // 優先從 Google Sheet 讀取 Date 欄位，如果沒有則使用當前日期
+              date: (row['Date'] || row['date'] || new Date().toISOString().split('T')[0]).toString().trim(),
+              category: (row['Category'] || '未分類').toString().trim(),
+              image: DEFAULT_IMAGES[index % DEFAULT_IMAGES.length] // 輪播圖片
+            };
+          });
+        
+        console.log(`Filtered articles from ${url}:`, articles.length);
+        resolve(articles);
+      },
+      error: (error: any) => {
+        console.error(`CSV Parse Error for ${url}:`, error);
+        // 不 reject，而是返回空陣列，這樣其他分頁仍可正常載入
+        resolve([]);
+      }
     });
+  });
+};
+
+export const ArticleService = {
+  // 抓取所有文章（從多個分頁合併）
+  async getAllArticles(): Promise<Article[]> {
+    try {
+      // 並行讀取所有 CSV 連結
+      const parsePromises = SHEET_CSV_URLS
+        .filter(url => url && url.trim().length > 0) // 過濾掉空字串和註釋
+        .map(url => parseCSV(url.trim()));
+      
+      // 等待所有 CSV 解析完成
+      const allArticlesArrays = await Promise.all(parsePromises);
+      
+      // 合併所有分頁的文章
+      const allArticles = allArticlesArrays.flat();
+      
+      console.log(`Total articles from all sheets: ${allArticles.length}`);
+      
+      // 按日期排序（最新的在前）
+      allArticles.sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        return dateB - dateA; // 降序
+      });
+      
+      return allArticles;
+    } catch (error) {
+      console.error('Error fetching articles from multiple sheets:', error);
+      // 如果全部失敗，返回空陣列而不是拋出錯誤
+      return [];
+    }
   },
 
   // 根據 Slug 抓取單篇文章
